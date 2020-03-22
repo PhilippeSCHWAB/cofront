@@ -1,0 +1,169 @@
+<mat-card class="myMenu">
+
+
+  <mat-card-title>
+    Menu
+  </mat-card-title>
+
+
+  <mat-card-content>
+    <!--   -->
+
+    <button mat-raised-button color="primary" [matMenuTriggerFor]="menu1">
+      User
+      <!--   -->
+    </button>
+    <mat-menu #menu1="matMenu">
+      <a mat-list-item routerLink="/user">
+        <button mat-menu-item>
+          <mat-icon>create</mat-icon>
+          <span>Create U</span>
+        </button>
+      </a>
+      <a mat-list-item routerLink="/userlist">
+        <button mat-menu-item>
+          <mat-icon>list</mat-icon>
+          <span>List</span>
+        </button>
+      </a>
+    </mat-menu>
+  </mat-card-content>
+
+
+  <mat-card-content>
+    <button mat-raised-button color="primary" [matMenuTriggerFor]="menu2  ">
+      Chain
+    </button>
+    <mat-menu #menu2="matMenu">
+      <a mat-list-item routerLink="/chain">
+        <button mat-menu-item>
+          <mat-icon>create</mat-icon>
+          <span>Create L</span>
+        </button>
+      </a>
+      <a mat-list-item routerLink="/chainlist">
+        <button mat-menu-item>
+          <mat-icon>list</mat-icon>
+          <span>List</span>
+        </button>
+      </a>
+
+    </mat-menu>
+
+  </mat-card-content>
+
+
+
+  <mat-card-content>
+    <button mat-raised-button color="primary" [matMenuTriggerFor]="menu3">
+      Static
+    </button>
+    <mat-menu #menu3="matMenu">
+      <button mat-menu-item>
+        <mat-icon>create</mat-icon>
+        <span>Create St</span>
+      </button>
+
+      <button mat-menu-item>
+        <mat-icon>list</mat-icon>
+        <span>List</span>
+      </button>
+    </mat-menu>
+  </mat-card-content>
+
+
+
+  <mat-card-content>
+    <button mat-raised-button color="primary" [matMenuTriggerFor]="menu4">
+      Setting
+    </button>
+    <!--
+    <mat-menu #menu4="matMenu">
+
+-->
+    <mat-menu #menu4="matMenu">
+      <button mat-menu-item [matMenuTriggerFor]="Setting">Base de Données</button>
+
+    </mat-menu>
+
+    <mat-menu #Setting="matMenu">
+      <button mat-menu-item [matMenuTriggerFor]="maccesauxchaines">Acces Aux Chaines</button>
+      <button mat-menu-item [matMenuTriggerFor]="mentite">Entite</button>
+      <button mat-menu-item [matMenuTriggerFor]="moutildetest">Outis de Test</button>
+      <button mat-menu-item [matMenuTriggerFor]="mserveurunix">Serveur Unix</button>
+    </mat-menu>
+
+    <mat-menu #maccesauxchaines="matMenu">
+
+      <a mat-list-item routerLink="/newbdd">
+        <button mat-menu-item>
+          <mat-icon>create</mat-icon>
+          <span>Create Access Aux chaines</span>
+        </button>
+      </a>
+      <a mat-list-item routerLink="/bddList">
+        <button mat-menu-item>
+          <mat-icon>list</mat-icon>
+          <span>List</span>
+        </button>
+      </a>
+
+    </mat-menu>
+
+    <mat-menu #mentite="matMenu">
+      <a mat-list-item routerLink="/newentity">
+        <button mat-menu-item>
+          <mat-icon>create</mat-icon>
+          <span>Create Entity</span>
+        </button>
+      </a>
+      <a mat-list-item routerLink="/entityList">
+        <button mat-menu-item>
+          <mat-icon>list</mat-icon>
+          <span>List</span>
+        </button>
+      </a>
+
+    </mat-menu>
+
+
+
+
+
+
+
+    <mat-menu #moutildetest="matMenu">
+      <a mat-list-item routerLink="/newoutildetest">
+        <button mat-menu-item>
+          <mat-icon>create</mat-icon>
+          <span>Create Entity</span>
+        </button>
+      </a>
+      <a mat-list-item routerLink="/outildetestList">
+        <button mat-menu-item>
+          <mat-icon>list</mat-icon>
+          <span>List</span>
+        </button>
+      </a>
+    </mat-menu>
+
+
+    <mat-menu #mserveurunix="matMenu">
+     <a mat-list-item routerLink="/newserveurunix">
+        <button mat-menu-item>
+          <mat-icon>create</mat-icon>
+          <span>Create Entity</span>
+        </button>
+      </a>
+      <a mat-list-item routerLink="/serveurunixList">
+        <button mat-menu-item>
+          <mat-icon>list</mat-icon>
+          <span>List</span>
+        </button>
+      </a>
+    </mat-menu>
+
+
+  </mat-card-content>
+
+</mat-card>

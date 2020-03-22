@@ -1,0 +1,192 @@
+<section fxLayout="row wrap" fxLayoutAlign="center center">
+  <mat-card fxFlex="1000px" fxFlex.xs="100%">
+    <form [formGroup]="reviewForm" novalidate (ngSubmit)="onReview(reviewForm.value)" fxLayout="column wrap"
+      fxLayoutAlign="center center" fxLayoutGap="10px">
+
+
+
+
+
+      <mat-card-content>
+
+
+
+
+        <mat-form-field style="margin-right: 10px;">
+          <mat-label> IUD : </mat-label>
+          <input matInput #input maxlength="6" placeholder="Nom du iud" formControlName="iud" required>
+          <mat-hint>6 caractères maximum.</mat-hint>
+          <mat-hint align="end">{{input.value?.length || 0}}/6</mat-hint>
+          <mat-error *ngIf="hasError('iud', 'required')">Saisie obligatoire</mat-error>
+          <mat-error *ngIf="hasError('iud', 'maxlength')">Le iud saisi dépasse 6 caractères</mat-error>
+        </mat-form-field>
+
+
+
+        <mat-form-field style="margin-right: 10px;">
+          <mat-label> Nom : </mat-label>
+          <input matInput placeholder="nom" formControlName="nom" minlength="2" required>
+          <mat-hint>2 caractères minimum.</mat-hint>
+          <mat-error *ngIf="hasError('nom', 'required')">Saisie obligatoire</mat-error>
+          <mat-error *ngIf="hasError('nom', 'maxlength')">La catégorie saisie dépasse 255 caractères</mat-error>
+        </mat-form-field>
+
+
+
+
+        <mat-form-field style="margin-right: 10px;">
+          <mat-label> Prénom : </mat-label>
+          <input matInput placeholder="Nom du prenom" formControlName="prenom" minlength="2" required>
+          <mat-hint>2 caractères minimum.</mat-hint>
+          <mat-error *ngIf="hasError('prenom', 'required')">Saisie obligatoire</mat-error>
+          <mat-error *ngIf="hasError('prenom', 'maxlength')">Le iud saisi dépasse x caractères</mat-error>
+        </mat-form-field>
+
+
+
+        <mat-form-field [formGroup]="reviewForm" style="margin-right: 10px;">
+          <mat-label> Email Utilisateur :</mat-label>
+          <input matInput placeholder="pat@example.com" formControlName="email">
+          <mat-error *ngIf="reviewForm.invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+
+
+
+        <mat-form-field style="margin-right: 10px;">
+          <mat-label> Entité : </mat-label>
+          <input matInput placeholder="entite" formControlName="entite" required>
+          <mat-hint>xx caractères maximum.</mat-hint>
+          <mat-error *ngIf="hasError('entite', 'required')">Saisie obligatoire</mat-error>
+          <mat-error *ngIf="hasError('entite', 'maxlength')">La catégorie saisie dépasse 255 caractères</mat-error>
+        </mat-form-field>
+
+
+        <mat-label class="mat-radio-label"> Is Manager : </mat-label>
+        <mat-radio-group #rGroup formControlName="ismanager" required style="margin-right: 10px;">
+          <mat-radio-button value="True" radioGroup="rGroup">true</mat-radio-button>
+          <mat-radio-button value="False" radioGroup="rGroup">False</mat-radio-button>
+        </mat-radio-group>
+
+
+        <mat-form-field [formGroup]="reviewForm" style="margin-right: 10px;">
+          <mat-label> Email Manager :</mat-label>
+          <input matInput placeholder="pat@example.com" formControlName="emailmanager" required>
+          <mat-error *ngIf="reviewForm.invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+
+
+
+
+        <mat-radio-group #rGroup formControlName="isadmin" style="margin-right: 10px;" appearance="fill">
+      <mat-label class="mat-radio-label"> Is Admin : </mat-label>
+          <mat-radio-button value="True" radioGroup="rGroup">true</mat-radio-button>
+          <mat-radio-button value="False" radioGroup="rGroup">False</mat-radio-button>
+        </mat-radio-group>
+
+
+
+
+
+        <mat-form-field style="margin-right: 10px;">
+          <mat-label> Accès aux Chaines : </mat-label>
+          <input matInput placeholder="Nom du accesauxchaines" formControlName="accesauxchaines" required>
+          <mat-hint>xx caractères maximum.</mat-hint>
+          <mat-error *ngIf="hasError('accesauxchaines', 'required')">Saisie obligatoire</mat-error>
+          <mat-error *ngIf="hasError('accesauxchaines', 'maxlength')">Le accesauxchaines saisi dépasse x caractères
+          </mat-error>
+        </mat-form-field>
+
+
+        <mat-form-field style="margin-right: 10px;">
+          <mat-label> Serveur Unix : </mat-label>
+          <input matInput placeholder="serveurunix" formControlName="serveurunix" required>
+          <mat-hint>xx caractères maximum.</mat-hint>
+          <mat-error *ngIf="hasError('serveurunix', 'required')">Saisie obligatoire</mat-error>
+          <mat-error *ngIf="hasError('serveurunix', 'maxlength')">La catégorie saisie dépasse 255 caractères</mat-error>
+        </mat-form-field>
+
+
+        <mat-form-field style="margin-right: 10px;">
+          <mat-label> Login Unix : </mat-label>
+          <input matInput placeholder="Nom du loginunix" formControlName="loginunix" minlength="2" required>
+          <mat-hint>2 caractères minimum.</mat-hint>
+          <mat-error *ngIf="hasError('loginunix', 'required')">Saisie obligatoire</mat-error>
+          <mat-error *ngIf="hasError('loginunix', 'maxlength')">Le iud saisi dépasse x caractères</mat-error>
+        </mat-form-field>
+
+
+        <mat-form-field style="margin-right: 10px" class="invisible">
+          <mat-label> Date de création : </mat-label>
+          <input matInput placeholder="datedecreation" formControlName="datedecreation"
+            value="2020-03-10T10:02:47.531+0000">
+          <mat-hint>DATE xx caractères maximum.</mat-hint>
+
+        </mat-form-field>
+
+
+        <mat-form-field style="margin-right: 10px;" class="invisible">
+          <mat-label> Auteur de Création : </mat-label>
+
+          <input matInput placeholder="auteurcreation du auteurcreation" formControlName="auteurcreation">
+          <mat-hint>xx caractères maximum.</mat-hint>
+          <mat-error *ngIf="hasError('auteurcreation', 'required')">Saisie obligatoire</mat-error>
+          <mat-error *ngIf="hasError('auteurcreation', 'maxlength')">Le iud saisi dépasse x caractères</mat-error>
+        </mat-form-field>
+
+
+
+        <!--////////////////////////////////////////////////////// -->
+
+        <label class="mdc-text-field mdc-text-field--disabled" class="invisible">
+          <mat-form-field style="margin-right: 10px;">
+            <mat-label> Date de modification : </mat-label>
+
+
+            <input matInput placeholder="datedemodification" formControlName="datedemodification"
+              value="2020-03-10T10:02:47.531+0000">
+            <span class="mdc-floating-label" id="my-label-id">Disabled text field</span>
+            <mat-hint>DATE 2020-03-10T10:02:47.531+0000.</mat-hint>
+            <mat-error *ngIf="hasError('datedemodification', 'required')">Saisie obligatoire</mat-error>
+            <mat-error *ngIf="hasError('datedemodification', 'maxlength')">La date saisie dépasse 255 caractères
+            </mat-error>
+          </mat-form-field>
+        </label>
+
+
+
+
+        <mat-form-field style="margin-right: 10px;" class="invisible">
+          <mat-label> Auteur de modification : </mat-label>
+
+          <input matInput placeholder="Nom du auteurdemodification" formControlName="auteurdemodification">
+          <mat-hint>xx caractères maximum.</mat-hint>
+          <mat-error *ngIf="hasError('auteurdemodification', 'required')">Saisie obligatoire</mat-error>
+          <mat-error *ngIf="hasError('auteurdemodification', 'maxlength')">Le iud saisi dépasse x caractères</mat-error>
+        </mat-form-field>
+
+        <mat-form-field style="margin-right: 10px;">
+          <mat-label> Rèf MyAccess : </mat-label>
+
+
+          <input matInput type="number" placeholder="refmyaccess" formControlName="refmyaccess" required>
+
+          <mat-hint>xx caractères maximum.</mat-hint>
+          <mat-error *ngIf="hasError('refmyaccess', 'required')">Saisie obligatoire</mat-error>
+          <mat-error *ngIf="hasError('refmyaccess', 'maxlength')">La catégorie saisie dépasse 255 caractères</mat-error>
+        </mat-form-field>
+
+
+        <mat-card-actions align="left">
+          <button type="button" mat-raised-button color="warn" (click)="onCancel()">Annuler</button>
+
+          <button mat-raised-button color="primary" [disabled]="!reviewForm.valid"
+            style="margin-left: 15px;">Enregistrer</button>
+
+        </mat-card-actions>
+
+
+
+      </mat-card-content>
+    </form>
+  </mat-card>
+</section>
