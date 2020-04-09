@@ -68,7 +68,7 @@ export class UserListComponent implements OnInit {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   private user: Observable<User[]>;
-  userList = this.userService.users;
+  userList = this.userService.getUsers;
   userForm;
   users: any;
 
@@ -89,9 +89,9 @@ export class UserListComponent implements OnInit {
     private userService: UserService,
     private route: ActivatedRoute
   ) {
-    this.users = this.userService.getUsersTestObservable();
+    this.users = this.userService.getUsers();
     this.userForm = this.formBuilder.group({
-
+      id: '',
       iud: '',
       nom: '',
       prenom: '',
@@ -145,8 +145,8 @@ export class UserListComponent implements OnInit {
   }
 
 
-  onEditUser(useriud) {
-alert(useriud);
+  onEditUser(userid) {
+alert(userid);
   }
 
 
@@ -160,7 +160,7 @@ alert(useriud);
   displayUserGrid() {
     // Load timeline list from the associate service
     // and subscribe to the callback when loading complete
-    this.userService.getUsersTestObservable().subscribe(dataList => {
+    this.userService.getUsers().subscribe(dataList => {
       this.dataSourceUser.data = dataList;
     });
   }
@@ -172,24 +172,24 @@ alert(useriud);
     }
   */
 
-  deleteUser(useriud) {
-    // alert(useriud);OTO
+  deleteUser(userid) {
+    // alert(userid);OTO
 
-    this.userService.deleteUsersTestObservable(useriud
-    ).subscribe(DeletedReview => console.log(DeletedReview));
+    this.userService.delete(userid
+    ).subscribe(DeletedUser => console.log(DeletedUser));
 
   }
 
-  onDeleteUser(useriud) {
-    alert(useriud);
-    console.log(useriud);
-    this.userService.deleteUsersTestObservable(useriud).subscribe(() => this.users = this.displayUserGrid());
+  onDeleteUser(userid) {
+    alert(userid);
+    console.log(userid);
+    this.userService.delete(userid).subscribe(() => this.users = this.displayUserGrid());
     //alert('avant rzfresy ' +useriud);
   }
 
-  clickMethod(useriud: string) {
-    if (confirm('Are you sure to delete :' + useriud)) {
-      console.log(this.onDeleteUser(useriud));
+  clickMethod(userid: string) {
+    if (confirm('Are you sure to delete :' + userid)) {
+      console.log(this.onDeleteUser(userid));
     }
   }
 
@@ -197,7 +197,7 @@ alert(useriud);
   displayTimelinUserListGrid() {
     // Load timeline list from the associate service
     // and subscribe to the callback when loading complete
-    this.userService.getUsersTestObservable().subscribe(dataList => {
+    this.userService.getUsers().subscribe(dataList => {
       this.dataSourceUser.data = dataList;
     });
   }

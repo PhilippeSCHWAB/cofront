@@ -31,9 +31,6 @@ export class BddlistparamComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
-
-
     this.bddDisplayedColumns = ['id', 'accesauxchaines', 'createdAt', 'updatedAt', 'edit', 'delete'];
     this.dataSourceBdd = new MatTableDataSource();
     this.displayBddGrid();

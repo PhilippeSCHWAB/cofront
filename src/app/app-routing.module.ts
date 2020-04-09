@@ -17,12 +17,16 @@ import { AlimserveurunixComponent} from './alimserveurunix/alimserveurunix.compo
 import { ServeurunixlistComponent } from './serveurunixlist/serveurunixlist.component';
 
 const routes: Routes = [
+
+   { path: '', component: MenuComponent},
+
   { path: 'userlist', component: UserListComponent },
-  { path: 'user', component: UserComponent},
+  { path: 'user/:user.id', component: UserComponent},
+  { path: 'newuser', component: UserComponent},
+
   { path: 'chain', component: ChainComponent},
+  { path: 'chain/:chain.id', component: ChainComponent},
   { path: 'chainlist', component: ChainlistComponent},
-  { path: '', component: MenuComponent},
-  { path: 'user/:user.iud', component: UserComponent},
 
   { path: 'bddList', component: BddlistparamComponent},
   { path: 'bdd/:bdd.id', component: AlimbddvarComponent},

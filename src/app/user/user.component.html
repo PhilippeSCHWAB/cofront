@@ -1,15 +1,14 @@
 <section fxLayout="row wrap" fxLayoutAlign="center center">
   <mat-card fxFlex="1000px" fxFlex.xs="100%">
-    <form [formGroup]="reviewForm" novalidate (ngSubmit)="onReview(reviewForm.value)" fxLayout="column wrap"
+    <form [formGroup]="userForm" novalidate (ngSubmit)="onCreateUser(userForm.value)" fxLayout="column wrap"
       fxLayoutAlign="center center" fxLayoutGap="10px">
-
-
-
+      <mat-card-header>
+        <mat-card-title>{{formTitleLabel}}</mat-card-title>
+        <mat-card-subtitle>{{formSubtitleLabel}}</mat-card-subtitle>
+      </mat-card-header>
 
 
       <mat-card-content>
-
-
 
 
         <mat-form-field style="margin-right: 10px;">
@@ -44,10 +43,10 @@
 
 
 
-        <mat-form-field [formGroup]="reviewForm" style="margin-right: 10px;">
+        <mat-form-field style="margin-right: 10px;">
           <mat-label> Email Utilisateur :</mat-label>
           <input matInput placeholder="pat@example.com" formControlName="email">
-          <mat-error *ngIf="reviewForm.invalid">{{getErrorMessage()}}</mat-error>
+          <mat-error *ngIf="userForm.invalid">{{getErrorMessage()}}</mat-error>
         </mat-form-field>
 
 
@@ -62,23 +61,23 @@
 
 
         <mat-label class="mat-radio-label"> Is Manager : </mat-label>
-        <mat-radio-group #rGroup formControlName="ismanager" required style="margin-right: 10px;">
+        <mat-radio-group  formControlName="ismanager" required style="margin-right: 10px;">
           <mat-radio-button value="True" radioGroup="rGroup">true</mat-radio-button>
           <mat-radio-button value="False" radioGroup="rGroup">False</mat-radio-button>
         </mat-radio-group>
 
 
-        <mat-form-field [formGroup]="reviewForm" style="margin-right: 10px;">
+        <mat-form-field style="margin-right: 10px;">
           <mat-label> Email Manager :</mat-label>
           <input matInput placeholder="pat@example.com" formControlName="emailmanager" required>
-          <mat-error *ngIf="reviewForm.invalid">{{getErrorMessage()}}</mat-error>
+          <mat-error *ngIf="userForm.invalid">{{getErrorMessage()}}</mat-error>
         </mat-form-field>
 
 
 
 
-        <mat-radio-group #rGroup formControlName="isadmin" style="margin-right: 10px;" appearance="fill">
-      <mat-label class="mat-radio-label"> Is Admin : </mat-label>
+        <mat-radio-group  formControlName="isadmin" style="margin-right: 10px;" appearance="fill">
+          <mat-label class="mat-radio-label"> Is Admin : </mat-label>
           <mat-radio-button value="True" radioGroup="rGroup">true</mat-radio-button>
           <mat-radio-button value="False" radioGroup="rGroup">False</mat-radio-button>
         </mat-radio-group>
@@ -179,7 +178,7 @@
         <mat-card-actions align="left">
           <button type="button" mat-raised-button color="warn" (click)="onCancel()">Annuler</button>
 
-          <button mat-raised-button color="primary" [disabled]="!reviewForm.valid"
+          <button mat-raised-button color="primary" [disabled]="!userForm.valid"
             style="margin-left: 15px;">Enregistrer</button>
 
         </mat-card-actions>

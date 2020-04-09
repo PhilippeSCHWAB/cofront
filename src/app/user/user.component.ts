@@ -1,17 +1,22 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { UserService } from '../user.service';
-import { User } from '../interfaceUser';
-import { Location, getLocaleDateTimeFormat } from '@angular/common';
-import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
-import { ErrorStateMatcher } from '@angular/material/core';
-import { timestamp } from 'rxjs/operators';
-import { MatRadioModule } from '@angular/material/radio';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
-import { ActivatedRoute } from '@angular/router';//update
+import { User } from '../interfaceUser';
 import { Observable } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';//update
+import { Location, getLocaleDateTimeFormat } from '@angular/common';
 
-/** Error when invalid control is dirty, touched, or submitted. */
+//import {  FormGroupDirective, NgForm } from '@angular/forms';
+//import { ErrorStateMatcher } from '@angular/material/core';
+//import { timestamp } from 'rxjs/operators';
+//import { MatRadioModule } from '@angular/material/radio';
+
+
+
+//import { ValueTransformer } from '@angular/compiler/src/util';
+
+/** Error when invalid control is dirty, touched, or submitted.
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
     const isSubmitted = form && form.submitted;
@@ -20,13 +25,13 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 }
 
 export class InputErrorStateMatcherExample {
-  reviewForm = new FormControl('', [
+  userForm = new FormControl('', [
     Validators.required,
     Validators.email,
   ]);
   matcher = new MyErrorStateMatcher();
 }
-
+*/
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
@@ -34,45 +39,65 @@ export class InputErrorStateMatcherExample {
 })
 
 export class UserComponent implements OnInit {
-  dataSourceUser: MatTableDataSource<User>;
 
-  temporaryUser: User;
+  public user: User; //= new User();
+  public userForm: FormGroup;
 
-  @Input() reviews;
-  matRadioGroup: any;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
 
-  reviewForm = this.formBuilder.group({
-    //  note: 3,
-    // comment: '',
-    iud: '',
-    nom: '',
-    prenom: '',
-    email: new FormControl('', [Validators.required, Validators.email]),
-    entite: '',
-    ismanager: 'false',
-    emailmanager: new FormControl('', [Validators.required, Validators.email]),
-    isadmin: 'false',
-    accesauxchaines: '',
-    serveurunix: '',
-    loginunix: '',
-    datedecreation: '',
-    auteurcreation: '',
-    datedemodification: '',
-    auteurdemodification: '',
-    refmyaccess: ''
-  })
+  public dataSourceUser: MatTableDataSource<User>;
 
+  userDisplayedColumns: string[];
+
+
+  private actionFormStatus: string; // To define if the form utility. Acceptable values = ADD / UPDATE
+  formTitleLabel: string;
+  formSubtitleLabel: string;
+  paramId;
+
+  //  matRadioGroup: any;
+  /*
+    dataSourceUser: any;
+    temporaryUser: User;
+
+    @Input() users;
+
+    userForm = this.formBuilder.group({
+      //  note: 3,
+      // comment: '',
+      id: '',
+      iud: '',
+      nom: '',
+      prenom: '',
+      email: new FormControl('', [Validators.required, Validators.email]),
+      entite: '',
+      ismanager: 'false',
+      emailmanager: new FormControl('', [Validators.required, Validators.email]),
+      isadmin: 'false',
+      accesauxchaines: '',
+      user: '',
+      loginunix: '',
+      datedecreation: '',
+      auteurcreation: '',
+      datedemodification: '',
+      auteurdemodification: '',
+      refmyaccess: ''
+    })
+*/
   //// ** Gestion Email ** ////
   email2 = new FormControl('', [Validators.required, Validators.email]);
-  paramIud: string; // update
-  private actionFormStatus: string; // To define if the form utility. Acceptable values = ADD / UPDATE
-  private user: Observable<User[]>;
-  userList = this.userService.users;
-  userForm;
-  users: any;
+  //private actionFormStatus: string; // To define if the form utility. Acceptable values = ADD / UPDATE
+  /*
+      paramId: any; // update
 
+      private user: Observable<User[]>;
+      userList = this.userService.getUsers;
+      userForm;
+      users: any;
+      valeur: any;
 
-
+    */
 
   getErrorMessage() {
     if (this.email2.hasError('required')) {
@@ -85,61 +110,163 @@ export class UserComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
-    private location: Location,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private location: Location
   ) { }
 
 
-
   ngOnInit() {
+    this.userForm = new FormGroup({
+      //id: new FormControl('', ),
+      iud: new FormControl(''),
+      nom: new FormControl(''),
+      prenom: new FormControl(''),
+      email: new FormControl('', [Validators.required, Validators.email]),
+      entite: new FormControl(''),
+      ismanager: new FormControl(''),
+      emailmanager: new FormControl('', [Validators.required, Validators.email]),
+      isadmin: new FormControl(''),
+      accesauxchaines: new FormControl(''),
+      serveurunix: new FormControl(''),
+      loginunix: new FormControl(''),
+      datedecreation: new FormControl(''),
+      auteurcreation: new FormControl(''),
+      datedemodification: new FormControl(''),
+      auteurdemodification: new FormControl(''),
+      refmyaccess: new FormControl('')
+    });
+    this.userDisplayedColumns = ['iud', 'nom', 'prenom', 'email', 'entite', 'ismanager', 'emailmanager', 'isadmin',
+      'accesauxchaines', 'serveurunix', 'loginunix', 'datedecreation', 'auteurcreation', 'datedemodification', 'auteurdemodification',
+      'refmyaccess'];
 
+    // Get recieved user id
     this.route.paramMap.subscribe(
       params => {
-        // Get param Iud
-        this.paramIud = params.get('user.iud');
-        alert("jjj : " + this.paramIud);
-        //     this.dataSourceUser.filter = this.paramIud;
-      }
-    )
+        // Get param Id
+        this.paramId = params.get('user.id');
+        //  alert(this.paramId);
+        if (params.get('user.id') != null) {
+          alert('UPDATE');
+          this.actionFormStatus = 'UPDATE';
 
-    this.users = this.userService.getFilteredUserList(this.paramIud);
-    alert("kkk : " + this.userService.getFilteredUserList(this.paramIud));
+          this.userForm = new FormGroup({
+            id: new FormControl(''),
+            iud: new FormControl('555'),
+            nom: new FormControl(''),
+            prenom: new FormControl(''),
+            email: new FormControl('', [Validators.required, Validators.email]),
+            entite: new FormControl(''),
+            ismanager: new FormControl(''),
+            emailmanager: new FormControl('', [Validators.required, Validators.email]),
+            isadmin: new FormControl(''),
+            accesauxchaines: new FormControl(''),
+            serveurunix: new FormControl(''),
+            loginunix: new FormControl(''),
+            datedecreation: new FormControl(''),
+            auteurcreation: new FormControl(''),
+            datedemodification: new FormControl(''),
+            auteurdemodification: new FormControl(''),
+            refmyaccess: new FormControl('')
+          });
 
 
 
+          this.userService.getUsers().subscribe((users: User[]) => {
+            // Get Timeline by id
+            this.user = users.filter(t => t.id === parseInt(this.paramId))[0];
+            this.dataSourceUser = new MatTableDataSource();
+            // alert(this.user.id + ' / ' + this.user.nom + ' / ' + this.user.serveurunix);
+            this.userForm.setValue({
+              id: this.user.id,
+              iud: this.user.iud,
+              nom: this.user.nom,
+              prenom: this.user.prenom,
+              email: this.user.email,
+              entite: this.user.entite,
+              ismanager: this.user.ismanager,
+              emailmanager: this.user.emailmanager,
+              isadmin: this.user.isadmin,
+              accesauxchaines: this.user.accesauxchaines,
+              serveurunix: this.user.serveurunix,
+              loginunix: this.user.loginunix,
+              datedecreation: this.user.datedecreation,
+              auteurcreation: this.user.auteurcreation,
+              datedemodification: this.user.datedemodification,
+              auteurdemodification: this.user.auteurdemodification,
+              refmyaccess: this.user.refmyaccess
+            });
+            this.formTitleLabel = 'Formulaire de modification 6:01';
+            this.formSubtitleLabel = 'Modifier un User';
+          });
+        }
+        else {
+          //  alert('ADD');
+          this.actionFormStatus = 'ADD',
+
+            this.userForm = new FormGroup({
+              // id: new FormControl(''),
+              iud: new FormControl(''),
+              nom: new FormControl(''),
+              prenom: new FormControl(''),
+              email: new FormControl('', [Validators.required, Validators.email]),
+              entite: new FormControl(''),
+              ismanager: new FormControl(''),
+              emailmanager: new FormControl('', [Validators.required, Validators.email]),
+              isadmin: new FormControl(''),
+              accesauxchaines: new FormControl(''),
+              serveurunix: new FormControl(''),
+              loginunix: new FormControl(''),
+              datedecreation: new FormControl(''),
+              auteurcreation: new FormControl(''),
+              datedemodification: new FormControl(''),
+              auteurdemodification: new FormControl(''),
+              refmyaccess: new FormControl('')
+            });
+
+          this.formTitleLabel = 'Formulaire d\'ajout 8h10';
+          this.formSubtitleLabel = 'Ajouter un nouveau Timeline 8h09';
+          this.dataSourceUser = new MatTableDataSource();
+          this.dataSourceUser.paginator = this.paginator;
+          this.dataSourceUser.sort = this.sort;
+        }
+      });
+
+    this.userDisplayedColumns = ['id', 'iud', 'nom', 'prenom', 'email', 'entite', 'ismanager', 'emailmanager', 'isadmin',
+      'accesauxchaines', 'serveurunix', 'loginunix', 'datedecreation', 'auteurcreation', 'datedemodification', 'auteurdemodification',
+      'refmyaccess'];
+    this.dataSourceUser = new MatTableDataSource();
+
+    this.displayUserGrid();
   }
 
 
+  displayUserGrid() {
+    // Load user list from the associate service
+    // and subscribe to the callback when loading complete
+    this.userService.getUsers().subscribe(dataList => {
+      this.dataSourceUser.data = dataList;
+    });
+  }
+
 
   hasError = (controlName: string, errorName: string) => {
-    return this.reviewForm.controls[controlName].hasError(errorName);
+    return this.userForm.controls[controlName].hasError(errorName);
   }
 
   public onCancel = () => {
     this.location.back();
   }
 
-
-
-
-     displayUserGrid() {
-      // Load timeline list from the associate service
-      // and subscribe to the callback when loading complete
-      this.userService.getUsersTestObservable().subscribe(dataList => {
-        this.dataSourceUser.data = dataList;
-      });
-    }
-
-    onReview(review) {
-      review.datedecreation = new Date().toISOString();
-      review.datedemodification = new Date().toISOString();
-      this.userService.createUsersTestObservable(review).subscribe(savedReview => console.log(savedReview));
-      alert('L\'utilisateur est enregistré');
-      this.location.back();
-      //console.log(review);
-      // console.log(review.datedecreation);
-      //  this.location.back();
-    }
+  onCreateUser(user) {
+    user.datedecreation = new Date().toISOString();
+    user.datedemodification = new Date().toISOString();
+    this.userService.createUsersTestObservable(user).subscribe(savedUser => console.log(savedUser));
+    alert('L\'utilisateur est enregistré');
+    this.location.back();
+    //console.log(user);
+    // console.log(user.datedecreation);
+    //  this.location.back();
+  }
 
 
 

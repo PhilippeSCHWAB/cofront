@@ -1,10 +1,9 @@
 export interface Chain {
 
-
-
+  id: number;
   nomdelachaine: string;
   shortname: string;
-  accessauxchaines: string;
+  accesauxchaines: string;
   codeenvironnement: string;
   ibmexportpath: string;
   buildpath: string;

@@ -61,7 +61,7 @@ export class ChainlistComponent implements OnInit {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   private chain: Observable<Chain[]>;
-  chainList = this.chainService.chains;
+  chainList = this.chainService.getChains;
   chainForm: any;
   chains: any;
   /*
@@ -74,22 +74,24 @@ export class ChainlistComponent implements OnInit {
     private formBuilder: FormBuilder,
     private chainService: ChainService
   ) {
-    this.chains = this.chainService.getChainsTestObservable();
+    this.chains = this.chainService.getChains();
     this.chainForm = this.formBuilder.group({
 
       nomdelachaine: '',
       shortname: '',
+      accesauxchaines: '',
       outildetest: '',
-      accessauxchaines: '',
+
       datedemodification: '',
-      auteurdemodification: '',
+      auteurdemodification: ''
     });
   }
 
+
   ngOnInit() {
 
-    this.chainDisplayedColumns = ['nomdelachaine', 'shortname', 'outildetest', 'accessauxchaines', 'datedemodification',
-      'auteurdemodification', 'delete'];
+    this.chainDisplayedColumns = ['nomdelachaine', 'shortname', 'outildetest', 'accesauxchaines', 'datedemodification',
+      'auteurdemodification', 'edit', 'delete'];
 
     this.dataSourceChain = new MatTableDataSource();
     this.dataSourceChain.filterPredicate = (p: Chain, filtre: any) => {
@@ -106,7 +108,7 @@ export class ChainlistComponent implements OnInit {
           }
         }
       }
-      return result
+      return result;
     };
 
 
@@ -127,7 +129,7 @@ export class ChainlistComponent implements OnInit {
   displayChainGrid() {
     // Load timeline list from the associate service
     // and subscribe to the callback when loading complete
-    this.chainService.getChainsTestObservable().subscribe(dataList => {
+    this.chainService.getChains().subscribe(dataList => {
       this.dataSourceChain.data = dataList;
     });
   }
@@ -155,10 +157,10 @@ export class ChainlistComponent implements OnInit {
   */
 
 
-  onDeleteChain(chainnomdelachaine) {
-    alert(chainnomdelachaine);
-    console.log(chainnomdelachaine);
-    this.chainService.deleteChainsTestObservable(chainnomdelachaine).subscribe(() => this.chains = this.displayChainGrid());
+  onDeleteChain(chainid) {
+    alert(chainid);
+    console.log(chainid);
+    this.chainService.delete(chainid).subscribe(() => this.chains = this.displayChainGrid());
 
   }
   /*
@@ -184,6 +186,13 @@ export class ChainlistComponent implements OnInit {
     this.searchCondition[columnKey] = 'none';
     this.applyFilter();
   }
+
+
+  onEditChain(chainid) {
+    alert(chainid);
+  }
+
+
 
 }
 

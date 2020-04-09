@@ -86,7 +86,6 @@ export class BddService {
  */
 
   public update(bdd: Bdd): Observable<Bdd> {
-
   //  alert('update bdd : '+ bdd);
     return this.http.put<Bdd>(this.URL_BDDS2, bdd, this.httpOptions);
   }
