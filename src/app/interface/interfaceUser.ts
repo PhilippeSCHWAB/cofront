@@ -1,3 +1,5 @@
+import { Chain } from './interfaceChain';
+
 export interface User {
 
   id: number;
@@ -16,6 +18,6 @@ export interface User {
   auteurcreation: string;
   datedemodification: string;
   auteurdemodification: string;
-  refmyaccess: string;
-
+  refmyaccess: number;
+  chain: Chain;
 }

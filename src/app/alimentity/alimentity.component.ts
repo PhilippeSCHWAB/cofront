@@ -1,9 +1,9 @@
 
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { EntityService } from '../entity.service';
+import { EntityService } from '../service/entity.service';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
-import { Entity } from '../interfaceEntity';
+import { Entity } from '../interface/interfaceEntity';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router'; // update
 import { Location } from '@angular/common';

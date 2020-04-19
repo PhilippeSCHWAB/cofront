@@ -1,5 +1,5 @@
 import { Injectable, SystemJsNgModuleLoader } from '@angular/core';
-import { User } from './interfaceUser';
+import { User } from '../interface/interfaceUser';
 import { Observable , throwError} from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { HttpClient, HttpParams,HttpErrorResponse } from '@angular/common/http';
@@ -20,8 +20,8 @@ export class UserService {
     })
   };
 
-  private user: User[] = [];
-
+   users: User[] = [];
+   user: User;
  // user: Observable<User[]>;
 
   private URL_BDDS = 'http://localhost:8080/api/user';
@@ -39,7 +39,7 @@ export class UserService {
       // Perfom these actions when loading complete
       .pipe(
         // Save and sort the loaded datalist into the timelines array
-        tap(dataList => this.user = dataList.sort((a, b) =>
+        tap(dataList => this.users = dataList.sort((a, b) =>
         (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0))),
         // Generic error handler
         catchError(this.handleError)
@@ -80,6 +80,17 @@ export class UserService {
 public create(user: User): Observable<User> {
   return this.http.post<User>(this.URL_BDDS, user, this.httpOptions);
 }
+
+
+
+public createChainToUser(user: User): Observable<User> {
+  return this.http.post<User>(this.URL_BDDS, user, this.httpOptions);
+}
+
+
+
+
+
 
 
 public update(user: User): Observable<User> {

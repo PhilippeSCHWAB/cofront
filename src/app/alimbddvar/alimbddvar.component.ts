@@ -1,9 +1,9 @@
 
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { BddService } from '../bdd.service';
+import { BddService } from '../service/bdd.service';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
-import { Bdd } from '../interfaceBdd';
+import { Bdd } from '../interface/interfaceBdd';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router'; // update
 import { Location } from '@angular/common';

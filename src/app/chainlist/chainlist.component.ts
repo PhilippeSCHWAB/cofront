@@ -1,11 +1,13 @@
 
 import { Component, OnInit, Output, ViewChild } from '@angular/core';
-import { ChainService } from '../chain.service';
+import { ChainService } from '../service/chain.service';
+import { UserService } from '../service/user.service';
 import { FormBuilder } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { Chain } from '../interfaceChain';
+import { Chain } from '../interface/interfaceChain';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
-
+import { User } from '../interface/interfaceUser';
+import { Location, getLocaleDateTimeFormat } from '@angular/common';
 
 
 
@@ -55,6 +57,8 @@ export class ChainlistComponent implements OnInit {
   public searchValue: any = {};
   public searchCondition: any = {};
   private filterMethods = CONDITIONS_FUNCTIONS;
+  //user: User;
+  chainToUserCreation;
 
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
@@ -70,10 +74,36 @@ export class ChainlistComponent implements OnInit {
     })
   */
 
+  user = {
+    id: 1,
+    iud: 'b48022',
+    nom: 'Schwab',
+    prenom: 'Male',
+    email: '',
+    entite: '',
+    ismanager: false,
+    emailmanager: '',
+    isadmin: false,
+    accesauxchaines: '',
+    loginunix: '',
+    serveurunix: '',
+    datedecreation: '',
+    auteurcreation: '',
+    datedemodification: '',
+    auteurdemodification: '',
+    refmyaccess: 0,
+    // chain: any,
+  }
+
   constructor(
     private formBuilder: FormBuilder,
-    private chainService: ChainService
+    private chainService: ChainService,
+    private userService: UserService,
+    private location: Location
   ) {
+    //this.user.iud = 'b48022';
+    // this.user.nom = 'schwab';
+    //    this.user.prenom = 'philippe';
     this.chains = this.chainService.getChains();
     this.chainForm = this.formBuilder.group({
 
@@ -89,9 +119,10 @@ export class ChainlistComponent implements OnInit {
 
 
   ngOnInit() {
+    this.user = this.userService.user;
 
     this.chainDisplayedColumns = ['nomdelachaine', 'shortname', 'outildetest', 'accesauxchaines', 'datedemodification',
-      'auteurdemodification', 'edit', 'delete'];
+      'auteurdemodification', 'edit', 'ajouter', 'delete'];
 
     this.dataSourceChain = new MatTableDataSource();
     this.dataSourceChain.filterPredicate = (p: Chain, filtre: any) => {
@@ -111,13 +142,8 @@ export class ChainlistComponent implements OnInit {
       return result;
     };
 
-
-
-
-
     this.dataSourceChain.paginator = this.paginator;
     this.dataSourceChain.sort = this.sort;
-
     this.displayChainGrid();
   }
 
@@ -135,14 +161,11 @@ export class ChainlistComponent implements OnInit {
   }
 
 
-
   onFilter(filteringValues) {
     alert('filteringValues :' + filteringValues.nomdelachaineFilterSelected);
     this.chains = this.chainService.
       getFilteredChainList(filteringValues.nomdelachaineFilterSelected);
   }
-
-
 
   /*
 
@@ -152,16 +175,12 @@ export class ChainlistComponent implements OnInit {
       this.ChainService.deleteChainsTestObservable(useriud
       ).subscribe(DeletedReview => console.log(DeletedReview));
     }
-
-
   */
-
 
   onDeleteChain(chainid) {
     alert(chainid);
     console.log(chainid);
     this.chainService.delete(chainid).subscribe(() => this.chains = this.displayChainGrid());
-
   }
   /*
   */
@@ -194,5 +213,98 @@ export class ChainlistComponent implements OnInit {
 
 
 
+
+  onAddChainToUser(chain) {
+    alert('chainid : ' + chain.id);
+    alert('chainid : ' + chain.nomdelachaine);
+    alert('chainid : ' + chain.shortname);
+    alert('chainid : ' + chain.outildetest);
+
+    alert('userid : ' + this.user.id);
+    //this.chainidonly = chain.id;
+
+
+    this.chainToUserCreation = {
+      id: this.user.id,
+      iud: this.user.iud,
+      nom: this.user.nom,
+      prenom: this.user.prenom,
+
+      email: this.user.email,
+      entite: this.user.entite,
+
+      ismanager: this.user.ismanager,
+      emailmanager: this.user.emailmanager,
+
+      isadmin: this.user.isadmin,
+      accesauxchaines: this.user.accesauxchaines,
+      loginunix: this.user.loginunix,
+      serveurunix: this.user.serveurunix,
+      datedecreation: this.user.datedecreation,
+
+      auteurcreation: this.user.auteurcreation,
+      datedemodification: this.user.datedecreation,
+      auteurdemodification: this.user.auteurcreation,
+      refmyaccess: this.user.refmyaccess,
+      tchaines:  [{id:chain.id}]
+
+    };
+
+   // alert("ddddd"+ chain.id),
+      this.userService.createChainToUser(this.chainToUserCreation)
+
+        .subscribe(savedChainToUser => console.log('La ChainToUser a sauvegarder: ' + savedChainToUser));
+  }
+
+
+  /*
+
+    onAddChainToUser2(chainid) {
+      id: this.user.id,
+      iud: this.user.iud,
+      nom: this.user.nom,
+      prenom: this.user.prenom,
+
+      email: this.user.email,
+      entite: this.user.entite,
+
+      ismanager: this.user.ismanager,
+      emailmanager: this.user.emailmanager,
+
+      isadmin: this.user.isadmin,
+      accesauxchaines: this.user.accesauxchaines,
+      loginunix: this.user.loginunix,
+      serveurunix: this.user.serveurunix,
+      datedecreation: this.user.datedecreation,
+
+      auteurcreation: this.user.auteurcreation,
+      datedemodification: this.user.datedecreation,
+      auteurdemodification: this.user.auteurcreation,
+      refmyaccess: this.user.refmyaccess,
+
+      chain: this.chain
+
+
+
+
+      this.userService.createUsersTestObservable(this.chainToUserCreation).subscribe(savedUser => console.log(savedUser));
+      alert('L\'utilisateur est enregistré');
+      this.location.back();
+
+    }
+  */
+
+  public onCancel = () => {
+    this.location.back();
+  }
+
+
+
+
+
 }
+
+
+
+
 

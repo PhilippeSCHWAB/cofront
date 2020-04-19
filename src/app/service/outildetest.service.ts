@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { OutilDeTest } from './interfaceOutilDeTest';
+import { OutilDeTest } from '../interface/interfaceOutilDeTest';
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { HttpClient, HttpParams, HttpErrorResponse } from '@angular/common/http';

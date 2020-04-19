@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { ChainService } from '../chain.service';
+import { ChainService } from '../service/chain.service';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
-import { Chain } from '../interfaceChain';
+import { Chain } from '../interface/interfaceChain';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';//update
 import { Location, getLocaleDateTimeFormat } from '@angular/common';

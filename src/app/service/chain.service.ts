@@ -1,9 +1,10 @@
 import { Injectable, SystemJsNgModuleLoader } from '@angular/core';
-import { Chain } from './interfaceChain';
-import { Observable , throwError} from 'rxjs';
+import { Chain } from '../interface/interfaceChain';
+import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
-import { HttpClient, HttpParams,HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpErrorResponse } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
+import { ChainToUser } from '../interface/interfaceChainToUser';
 
 //const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json', Authorization: 'my-auth-token' }) };
 
@@ -22,10 +23,12 @@ export class ChainService {
 
   private chain: Chain[] = [];
 
- // chain: Observable<Chain[]>;
+  // chain: Observable<Chain[]>;
 
   private URL_BDDS = 'http://localhost:8080/api/chaine';
   private URL_BDDS2 = 'http://localhost:8080/api/chaine/62';
+  private URL_BDDS3 = 'http://localhost:8080/api/user';
+
 
 
   constructor(
@@ -40,7 +43,7 @@ export class ChainService {
       .pipe(
         // Save and sort the loaded datalist into the timelines array
         tap(dataList => this.chain = dataList.sort((a, b) =>
-        (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0))),
+          (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0))),
         // Generic error handler
         catchError(this.handleError)
       );
@@ -58,13 +61,13 @@ export class ChainService {
     params = params.append('idSelectedForm', idSelected);
     const options = { params: params };
     alert('chain service : ' + idSelected);
-    return this.http.get('http://localhost:8080/api/chaine/'+ idSelected);
+    return this.http.get('http://localhost:8080/api/chaine/' + idSelected);
   }
 
- /**
-   * Manage http error
-   * @param err The HttpErrorResponse to manage
-   */
+  /**
+    * Manage http error
+    * @param err The HttpErrorResponse to manage
+    */
   private handleError(err: HttpErrorResponse) {
     let errorMessage = '';
     if (err.error instanceof ErrorEvent) {
@@ -77,31 +80,31 @@ export class ChainService {
   }
 
 
-public create(chain: Chain): Observable<Chain> {
-  return this.http.post<Chain>(this.URL_BDDS, chain, this.httpOptions);
-}
+  public create(chain: Chain): Observable<Chain> {
+    return this.http.post<Chain>(this.URL_BDDS, chain, this.httpOptions);
+  }
 
 
-public update(chain: Chain): Observable<Chain> {
+  public update(chain: Chain): Observable<Chain> {
 
-  //  alert('update serveurunix : '+ chain);
+    //  alert('update serveurunix : '+ chain);
     return this.http.put<Chain>(this.URL_BDDS2, chain, this.httpOptions);
   }
 
 
-//###### a faire ##########
+  //###### a faire ##########
   public delete(chain: Chain): Observable<Chain> {
-      alert('delete : '+ this.URL_BDDS + '/' + chain);
-      return this.http.delete<Chain>(this.URL_BDDS + '/' + chain);
-    }
+    alert('delete : ' + this.URL_BDDS + '/' + chain);
+    return this.http.delete<Chain>(this.URL_BDDS + '/' + chain);
+  }
 
 
 
 
-/*
-    deleteChainsTestObservable(chainnomdelachaine: string): Observable<any> {
-      alert('chain service : ' + chainnomdelachaine);
-      return this.httpClient.delete<Chain[]>('http://localhost:8080/postgresstchaine/' + chainnomdelachaine);
-    }
-*/
+  /*
+      deleteChainsTestObservable(chainnomdelachaine: string): Observable<any> {
+        alert('chain service : ' + chainnomdelachaine);
+        return this.httpClient.delete<Chain[]>('http://localhost:8080/postgresstchaine/' + chainnomdelachaine);
+      }
+  */
 }

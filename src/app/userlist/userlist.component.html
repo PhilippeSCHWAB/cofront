@@ -665,6 +665,18 @@
 
 
 
+    <ng-container matColumnDef='addchainforuser'>
+      <th mat-header-cell *matHeaderCellDef> addchainforuser </th>
+      <td mat-cell *matCellDef='let user'>
+        <mat-card-actions align='left'>
+          <a [routerLink]="['/chainlist' ]" (click)='AddChainForUser(user)' mat-raised-button
+            color='primary'>addchainforuser</a>
+        </mat-card-actions>
+      </td>
+    </ng-container>
+
+
+
     <ng-container matColumnDef='delete'>
       <th mat-header-cell *matHeaderCellDef> Supprimer </th>
       <td mat-cell *matCellDef='let user'>

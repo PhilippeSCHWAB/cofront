@@ -1,8 +1,8 @@
 import { Component, OnInit, Output, ViewChild } from '@angular/core';
-import { UserService } from '../user.service';
+import { UserService } from '../service/user.service';
 import { FormBuilder } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { User } from '../interfaceUser';
+import { User } from '../interface/interfaceUser';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';//update
 /*
@@ -115,7 +115,7 @@ export class UserListComponent implements OnInit {
 
     this.userDisplayedColumns = ['iud', 'nom', 'prenom', 'email', 'entite', 'ismanager', 'emailmanager',
       'isadmin', 'accesauxchaines', 'serveurunix', 'loginunix', 'datedecreation', 'auteurcreation',
-      'datedemodification', 'auteurdemodification', 'refmyaccess', 'edit', 'delete'];
+      'datedemodification', 'auteurdemodification', 'refmyaccess', 'edit', 'addchainforuser', 'delete'];
 
     this.dataSourceUser = new MatTableDataSource();
 
@@ -144,10 +144,6 @@ export class UserListComponent implements OnInit {
 
   }
 
-
-  onEditUser(userid) {
-alert(userid);
-  }
 
 
 
@@ -186,6 +182,32 @@ alert(userid);
     this.userService.delete(userid).subscribe(() => this.users = this.displayUserGrid());
     //alert('avant rzfresy ' +useriud);
   }
+
+
+
+
+
+  onEditUser(userid) {
+    alert(userid);
+  }
+
+
+
+  AddChainForUser(user: User) {
+    console.log('AddChainForUser! : ' + user.id);
+    console.log('AddChainForUser! : ' + user.iud);
+    console.log('AddChainForUser! : ' + user.nom);
+
+
+    this.userService.user = user;
+
+  }
+
+
+
+
+
+
 
   clickMethod(userid: string) {
     if (confirm('Are you sure to delete :' + userid)) {

@@ -25,7 +25,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/app" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/app/interface" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
@@ -35,6 +35,11 @@
     <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/app/interface" />
+      <recent name="$PROJECT_DIR$/src/app" />
+      <recent name="$PROJECT_DIR$/src/app/service" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/app" />
     </key>
@@ -87,6 +92,8 @@
       <workItem from="1584717902661" duration="52000" />
       <workItem from="1584881416815" duration="2123000" />
       <workItem from="1584884491707" duration="415000" />
+      <workItem from="1587284065250" duration="192000" />
+      <workItem from="1587284280597" duration="10000" />
     </task>
     <servers />
   </component>
@@ -94,10 +101,10 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="776" y="310" width="424" height="484" key="FileChooserDialogImpl" timestamp="1584454510486">
+    <state x="776" y="310" width="424" height="484" key="FileChooserDialogImpl" timestamp="1587284194172">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state x="776" y="310" width="424" height="484" key="FileChooserDialogImpl/67.27.1853.1053@67.27.1853.1053" timestamp="1584454510486" />
+    <state x="776" y="310" width="424" height="484" key="FileChooserDialogImpl/67.27.1853.1053@67.27.1853.1053" timestamp="1587284194172" />
     <state width="1807" height="277" key="GridCell.Tab.0.bottom" timestamp="1584455052916">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
@@ -118,10 +125,10 @@
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state width="498" height="446" key="SwitcherDM/67.27.1853.1053@67.27.1853.1053" timestamp="1584712350768" />
-    <state x="588" y="233" key="com.intellij.ide.util.TipDialog" timestamp="1584454967933">
+    <state x="588" y="233" key="com.intellij.ide.util.TipDialog" timestamp="1587284281274">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state x="588" y="233" key="com.intellij.ide.util.TipDialog/67.27.1853.1053@67.27.1853.1053" timestamp="1584454967933" />
+    <state x="588" y="233" key="com.intellij.ide.util.TipDialog/67.27.1853.1053@67.27.1853.1053" timestamp="1587284281274" />
     <state x="638" y="263" width="710" height="578" key="find.popup" timestamp="1584712248688">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>

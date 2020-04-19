@@ -1,9 +1,9 @@
 
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { OutilDeTestService } from '../outildetest.service';
+import { OutilDeTestService } from '../service/outildetest.service';
 import { FormBuilder } from '@angular/forms';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
-import { OutilDeTest } from '../interfaceOutilDeTest';
+import { OutilDeTest } from '../interface/interfaceOutilDeTest';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router'; // update
 import { FormGroup, FormControl, Validators } from '@angular/forms';

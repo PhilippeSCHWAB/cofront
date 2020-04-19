@@ -1,26 +1,7 @@
+<h3>Liste des chaines associées à l'utilisateur</h3>
 
+<p>userchain works!</p>
 
-<!--
-  <li>  Nom: {{ user.nom}} </li>
-  <li> Prénom:  {{ user.prenom }} </li>
-
-
--->
-
-<h2 class="mat-h2">Informations du user </h2>
-<div>
-  <div>id : {{user.id}}</div>
-  <div>iud : {{user.iud}}</div>
-  <div>Nom : {{user.nom}}</div>
-  <div>Prénom : {{user.prenom}}</div>
-  <div>  ------- </div>
-<!--
-  <div *ngIf="display">{{user.iud}}</div>
-
-</div>
--->
-
-<app-menu></app-menu>
 
 <mat-card-content>
   <table mat-table [dataSource]="dataSourceChain" matSort style="width: 100%;">
@@ -325,30 +306,11 @@
         <mat-card-actions align='left'>
           <a [routerLink]="['/chain', chain.id ]" (click)='onEditChain(chain.id)' mat-raised-button
             color='primary'>Editer</a>
+
         </mat-card-actions>
       </td>
     </ng-container>
 
-
-    <ng-container matColumnDef='ajouter'>
-      <th mat-header-cell *matHeaderCellDef> Ajouter </th>
-      <td mat-cell *matCellDef='let chain'>
-        <mat-card-actions align='left'>
-          <a  (click)='onAddChainToUser(chain)' mat-raised-button
-            color='primary'>Ajouter</a>
-        </mat-card-actions>
-      </td>
-    </ng-container>
-
-
-    <ng-container matColumnDef="delete">
-      <th mat-header-cell *matHeaderCellDef> Supprimer </th>
-      <td mat-cell *matCellDef="let chain">
-        <mat-card-actions align="left">
-          <a mat-raised-button color="primary" (click)="clickMethod(chain.id)">Supprimer</a>
-        </mat-card-actions>
-      </td>
-    </ng-container>
 
 
 
@@ -361,59 +323,3 @@
 
 <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]">
 </mat-paginator>
-
-<!--
-
-
-
-
-
-
-<div>
-  <form [formGroup]="chainForm" (ngSubmit)="onNewChain()">
-
-    <body>
-         <table>
-          <tr>
-            <th> nomdelachaine </th>
-            <th> shortname </th>
-            <th> outildetest </th>
-            <th> accesauxchaines </th>
-            <th> datedernieremodification</th>
-            <th> auteurdernieremodification </th>
-
-            <th> Editer ? </th>
-            <th> Sélectionner ! </th>
-            <th> Supprimer ? </th>
-          </tr>
-
-          <tr *ngFor=" let chain of chains | async; let i = index">
-            <td>{{chain.nomdelachaine}}</td>
-            <td>{{chain.shortname}}</td>
-            <td>{{chain.outildetest}}</td>
-            <td>{{chain.accesauxchaines}}</td>
-            <td>{{chain.datedernieremodification}}</td>
-            <td>{{chain.auteurdernieremodification}}</td>
-
-            <td>
-              <button class="button" type> Editer </button>
-            </td>
-            <td>
-              <button class="button" [routerLink]="'jeu/'+i"> Sélectionner </button>
-            </td>
--->
-<!--
-            <td><button class="btn liste" (click)="onDeleteTimeline(chain.nomdelachaine)"> Supprimer </button></td>
-
-            <td>
-              <button (click)="deleteUser(chain.iud)">Supprimer</button>
-            </td>
-
-        </table>
-
-    </body>
-
-
-  </form>
-</div>
-  -->

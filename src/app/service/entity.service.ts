@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Entity } from './interfaceEntity';
+import { Entity } from '../interface/interfaceEntity';
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { HttpClient, HttpParams, HttpErrorResponse } from '@angular/common/http';

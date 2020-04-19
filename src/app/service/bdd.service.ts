@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Bdd } from './interfaceBdd';
+import { Bdd } from '../interface/interfaceBdd';
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { HttpClient, HttpParams, HttpErrorResponse } from '@angular/common/http';

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ServeurUnix } from './interfaceServeurUnix';
+import { ServeurUnix } from '../interface/interfaceServeurUnix';
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { HttpClient, HttpParams, HttpErrorResponse } from '@angular/common/http';

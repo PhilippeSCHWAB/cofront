@@ -1,9 +1,9 @@
 
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ServeurUnixService } from '../serveurunix.service';
+import { ServeurUnixService } from '../service/serveurunix.service';
 import { FormBuilder } from '@angular/forms';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
-import { ServeurUnix } from '../interfaceServeurUnix';
+import { ServeurUnix } from '../interface/interfaceServeurUnix';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router'; // update
 import { FormGroup, FormControl, Validators } from '@angular/forms';
