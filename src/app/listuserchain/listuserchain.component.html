@@ -1,0 +1,728 @@
+
+
+
+<div *ngIf="isAvailable">Content to render when condition is true.
+
+<h2 class="mat-h2">Chaines affectées au user </h2>
+<div>
+  <div>id : {{user.id}}</div>
+  <div>iud : {{user.iud}}</div>
+
+  <div>  ------- </div>
+</div>
+
+<mat-card-content>
+
+  <table mat-table [dataSource]='dataSourceUser' matSort style='width: 100%;'>
+
+    <!-- IUD Column -->
+    <ng-container matColumnDef='iud'>
+      <th mat-header-cell *matHeaderCellDef>
+        <div class='header'>
+          iud.
+          <button mat-button class='btn-toggle' [matMenuTriggerFor]='menu'>
+            <mat-icon>keyboard_arrow_down</mat-icon>
+          </button>
+        </div>
+        <mat-menu #menu>
+          <div mat-menu-item mat-filter-item [disableRipple]='true' class='menu-title'>
+            iud.
+          </div>
+          <div mat-menu-item mat-filter-item [disableRipple]='true'>
+            <mat-form-field>
+              <mat-select [panelClass]="'mat-elevation-z10'" placeholder='Conditions' [(value)]='searchCondition.iud'>
+                <mat-option *ngFor='let  condition of conditionsList' [value]='condition.value'>{{condition.label}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div mat-menu-item mat-filter-item [disableRipple]='true'>
+            <mat-form-field>
+              <input matInput placeholder='Value' [(ngModel)]='searchValue.iud'>
+            </mat-form-field>
+          </div>
+          <div mat-menu-item mat-filter-item [disableRipple]='true'>
+            <button mat-raised-button (click)="clearColumn('iud')">Clear</button>
+            <button mat-raised-button color="primary" (click)="applyFilter()">Search</button>
+          </div>
+        </mat-menu>
+      </th>
+      <td mat-cell *matCellDef="let user"> {{user.iud}} </td>
+    </ng-container>
+
+
+    <!-- NOM Column -->
+    <ng-container matColumnDef='nom'>
+      <th mat-header-cell *matHeaderCellDef>
+        <div class='header'>
+          nom.
+          <button mat-button class='btn-toggle' [matMenuTriggerFor]='menu'>
+            <mat-icon>keyboard_arrow_down</mat-icon>
+          </button>
+        </div>
+        <mat-menu #menu>
+          <div mat-menu-item mat-filter-item [disableRipple]='true' class='menu-title'>
+            nom.
+          </div>
+          <div mat-menu-item mat-filter-item [disableRipple]='true'>
+            <mat-form-field>
+              <mat-select [panelClass]="'mat-elevation-z10'" placeholder='Conditions' [(value)]='searchCondition.nom'>
+                <mat-option *ngFor='let  condition of conditionsList' [value]='condition.value'>{{condition.label}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div mat-menu-item mat-filter-item [disableRipple]='true'>
+            <mat-form-field>
+              <input matInput placeholder='Value' [(ngModel)]='searchValue.nom'>
+            </mat-form-field>
+          </div>
+          <div mat-menu-item mat-filter-item [disableRipple]='true'>
+            <button mat-raised-button (click)="clearColumn('nom')">Clear</button>
+            <button mat-raised-button color="primary" (click)="applyFilter()">Search</button>
+          </div>
+        </mat-menu>
+      </th>
+      <td mat-cell *matCellDef="let user"> {{user.nom}} </td>
+    </ng-container>
+
+
+
+
+    <!-- PRENOM Column -->
+    <ng-container matColumnDef='prenom'>
+      <th mat-header-cell *matHeaderCellDef>
+        <div class='header'>
+          prenom.
+          <button mat-button class='btn-toggle' [matMenuTriggerFor]='menu'>
+            <mat-icon>keyboard_arrow_down</mat-icon>
+          </button>
+        </div>
+        <mat-menu #menu>
+          <div mat-menu-item mat-filter-item [disableRipple]='true' class='menu-title'>
+            prenom.
+          </div>
+          <div mat-menu-item mat-filter-item [disableRipple]='true'>
+            <mat-form-field>
+              <mat-select [panelClass]="'mat-elevation-z10'" placeholder='Conditions'
+                [(value)]='searchCondition.prenom'>
+                <mat-option *ngFor='let  condition of conditionsList' [value]='condition.value'>{{condition.label}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div mat-menu-item mat-filter-item [disableRipple]='true'>
+            <mat-form-field>
+              <input matInput placeholder='Value' [(ngModel)]='searchValue.prenom'>
+            </mat-form-field>
+          </div>
+          <div mat-menu-item mat-filter-item [disableRipple]='true'>
+            <button mat-raised-button (click)="clearColumn('prenom')">Clear</button>
+            <button mat-raised-button color="primary" (click)="applyFilter()">Search</button>
+          </div>
+        </mat-menu>
+      </th>
+      <td mat-cell *matCellDef="let user"> {{user.prenom}} </td>
+    </ng-container>
+
+
+
+    <!-- EMAIL Column -->
+    <ng-container matColumnDef='email'>
+      <th mat-header-cell *matHeaderCellDef>
+        <div class='header'>
+          email.
+          <button mat-button class='btn-toggle' [matMenuTriggerFor]='menu'>
+            <mat-icon>keyboard_arrow_down</mat-icon>
+          </button>
+        </div>
+        <mat-menu #menu>
+          <div mat-menu-item mat-filter-item [disableRipple]='true' class='menu-title'>
+            email.
+          </div>
+          <div mat-menu-item mat-filter-item [disableRipple]='true'>
+            <mat-form-field>
+              <mat-select [panelClass]="'mat-elevation-z10'" placeholder='Conditions' [(value)]='searchCondition.email'>
+                <mat-option *ngFor='let  condition of conditionsList' [value]='condition.value'>{{condition.label}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div mat-menu-item mat-filter-item [disableRipple]='true'>
+            <mat-form-field>
+              <input matInput placeholder='Value' [(ngModel)]='searchValue.email'>
+            </mat-form-field>
+          </div>
+          <div mat-menu-item mat-filter-item [disableRipple]='true'>
+            <button mat-raised-button (click)="clearColumn('email')">Clear</button>
+            <button mat-raised-button color="primary" (click)="applyFilter()">Search</button>
+          </div>
+        </mat-menu>
+      </th>
+      <td mat-cell *matCellDef="let user"> {{user.email}} </td>
+    </ng-container>
+
+
+
+    <!-- ENTITE Column -->
+    <ng-container matColumnDef='entite'>
+      <th mat-header-cell *matHeaderCellDef>
+        <div class='header'>
+          entite.
+          <button mat-button class='btn-toggle' [matMenuTriggerFor]='menu'>
+            <mat-icon>keyboard_arrow_down</mat-icon>
+          </button>
+        </div>
+        <mat-menu #menu>
+          <div mat-menu-item mat-filter-item [disableRipple]='true' class='menu-title'>
+            entite.
+          </div>
+          <div mat-menu-item mat-filter-item [disableRipple]='true'>
+            <mat-form-field>
+              <mat-select [panelClass]="'mat-elevation-z10'" placeholder='Conditions'
+                [(value)]='searchCondition.entite'>
+                <mat-option *ngFor='let  condition of conditionsList' [value]='condition.value'>{{condition.label}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div mat-menu-item mat-filter-item [disableRipple]='true'>
+            <mat-form-field>
+              <input matInput placeholder='Value' [(ngModel)]='searchValue.entite'>
+            </mat-form-field>
+          </div>
+          <div mat-menu-item mat-filter-item [disableRipple]='true'>
+            <button mat-raised-button (click)="clearColumn('entite')">Clear</button>
+            <button mat-raised-button color="primary" (click)="applyFilter()">Search</button>
+          </div>
+        </mat-menu>
+      </th>
+      <td mat-cell *matCellDef="let user"> {{user.entite}} </td>
+    </ng-container>
+
+
+
+    <!-- ismanager Column -->
+    <ng-container matColumnDef='ismanager'>
+      <th mat-header-cell *matHeaderCellDef>
+        <div class='header'>
+          ismanager.
+          <button mat-button class='btn-toggle' [matMenuTriggerFor]='menu'>
+            <mat-icon>keyboard_arrow_down</mat-icon>
+          </button>
+        </div>
+        <mat-menu #menu>
+          <div mat-menu-item mat-filter-item [disableRipple]='true' class='menu-title'>
+            ismanager.
+          </div>
+          <div mat-menu-item mat-filter-item [disableRipple]='true'>
+            <mat-form-field>
+              <mat-select [panelClass]="'mat-elevation-z10'" placeholder='Conditions'
+                [(value)]='searchCondition.ismanager'>
+                <mat-option *ngFor='let  condition of conditionsList' [value]='condition.value'>{{condition.label}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div mat-menu-item mat-filter-item [disableRipple]='true'>
+            <mat-form-field>
+              <input matInput placeholder='Value' [(ngModel)]='searchValue.ismanager'>
+            </mat-form-field>
+          </div>
+          <div mat-menu-item mat-filter-item [disableRipple]='true'>
+            <button mat-raised-button (click)="clearColumn('ismanager')">Clear</button>
+            <button mat-raised-button color="primary" (click)="applyFilter()">Search</button>
+          </div>
+        </mat-menu>
+      </th>
+      <td mat-cell *matCellDef="let user"> {{user.ismanager}} </td>
+    </ng-container>
+
+
+    <!-- emailmanager Column -->
+    <ng-container matColumnDef='emailmanager'>
+      <th mat-header-cell *matHeaderCellDef>
+        <div class='header'>
+          emailmanager.
+          <button mat-button class='btn-toggle' [matMenuTriggerFor]='menu'>
+            <mat-icon>keyboard_arrow_down</mat-icon>
+          </button>
+        </div>
+        <mat-menu #menu>
+          <div mat-menu-item mat-filter-item [disableRipple]='true' class='menu-title'>
+            emailmanager.
+          </div>
+          <div mat-menu-item mat-filter-item [disableRipple]='true'>
+            <mat-form-field>
+              <mat-select [panelClass]="'mat-elevation-z10'" placeholder='Conditions'
+                [(value)]='searchCondition.emailmanager'>
+                <mat-option *ngFor='let  condition of conditionsList' [value]='condition.value'>{{condition.label}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div mat-menu-item mat-filter-item [disableRipple]='true'>
+            <mat-form-field>
+              <input matInput placeholder='Value' [(ngModel)]='searchValue.emailmanager'>
+            </mat-form-field>
+          </div>
+          <div mat-menu-item mat-filter-item [disableRipple]='true'>
+            <button mat-raised-button (click)="clearColumn('emailmanager')">Clear</button>
+            <button mat-raised-button color="primary" (click)="applyFilter()">Search</button>
+          </div>
+        </mat-menu>
+      </th>
+      <td mat-cell *matCellDef="let user"> {{user.emailmanager}} </td>
+    </ng-container>
+
+
+
+
+    <!-- isadmin Column -->
+    <ng-container matColumnDef='isadmin'>
+      <th mat-header-cell *matHeaderCellDef>
+        <div class='header'>
+          isadmin.
+          <button mat-button class='btn-toggle' [matMenuTriggerFor]='menu'>
+            <mat-icon>keyboard_arrow_down</mat-icon>
+          </button>
+        </div>
+        <mat-menu #menu>
+          <div mat-menu-item mat-filter-item [disableRipple]='true' class='menu-title'>
+            isadmin.
+          </div>
+          <div mat-menu-item mat-filter-item [disableRipple]='true'>
+            <mat-form-field>
+              <mat-select [panelClass]="'mat-elevation-z10'" placeholder='Conditions'
+                [(value)]='searchCondition.isadmin'>
+                <mat-option *ngFor='let  condition of conditionsList' [value]='condition.value'>{{condition.label}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div mat-menu-item mat-filter-item [disableRipple]='true'>
+            <mat-form-field>
+              <input matInput placeholder='Value' [(ngModel)]='searchValue.isadmin'>
+            </mat-form-field>
+          </div>
+          <div mat-menu-item mat-filter-item [disableRipple]='true'>
+            <button mat-raised-button (click)="clearColumn('isadmin')">Clear</button>
+            <button mat-raised-button color="primary" (click)="applyFilter()">Search</button>
+          </div>
+        </mat-menu>
+      </th>
+      <td mat-cell *matCellDef="let user"> {{user.isadmin}} </td>
+    </ng-container>
+
+
+
+
+    <!-- accesauxchaines Column -->
+    <ng-container matColumnDef='accesauxchaines'>
+      <th mat-header-cell *matHeaderCellDef>
+        <div class='header'>
+          accesauxchaines.
+          <button mat-button class='btn-toggle' [matMenuTriggerFor]='menu'>
+            <mat-icon>keyboard_arrow_down</mat-icon>
+          </button>
+        </div>
+        <mat-menu #menu>
+          <div mat-menu-item mat-filter-item [disableRipple]='true' class='menu-title'>
+            accesauxchaines.
+          </div>
+          <div mat-menu-item mat-filter-item [disableRipple]='true'>
+            <mat-form-field>
+              <mat-select [panelClass]="'mat-elevation-z10'" placeholder='Conditions'
+                [(value)]='searchCondition.accesauxchaines'>
+                <mat-option *ngFor='let  condition of conditionsList' [value]='condition.value'>{{condition.label}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div mat-menu-item mat-filter-item [disableRipple]='true'>
+            <mat-form-field>
+              <input matInput placeholder='Value' [(ngModel)]='searchValue.accesauxchaines'>
+            </mat-form-field>
+          </div>
+          <div mat-menu-item mat-filter-item [disableRipple]='true'>
+            <button mat-raised-button (click)="clearColumn('accesauxchaines')">Clear</button>
+            <button mat-raised-button color="primary" (click)="applyFilter()">Search</button>
+          </div>
+        </mat-menu>
+      </th>
+      <td mat-cell *matCellDef="let user"> {{user.accesauxchaines}} </td>
+    </ng-container>
+
+
+
+
+    <!--///////////////////////////////////////////////////////////////////////-->
+
+
+
+
+    <!-- serveurunix Column -->
+    <ng-container matColumnDef='serveurunix'>
+      <th mat-header-cell *matHeaderCellDef>
+        <div class='header'>
+          serveurunix.
+          <button mat-button class='btn-toggle' [matMenuTriggerFor]='menu'>
+            <mat-icon>keyboard_arrow_down</mat-icon>
+          </button>
+        </div>
+        <mat-menu #menu>
+          <div mat-menu-item mat-filter-item [disableRipple]='true' class='menu-title'>
+            serveurunix.
+          </div>
+          <div mat-menu-item mat-filter-item [disableRipple]='true'>
+            <mat-form-field>
+              <mat-select [panelClass]="'mat-elevation-z10'" placeholder='Conditions'
+                [(value)]='searchCondition.serveurunix'>
+                <mat-option *ngFor='let  condition of conditionsList' [value]='condition.value'>{{condition.label}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div mat-menu-item mat-filter-item [disableRipple]='true'>
+            <mat-form-field>
+              <input matInput placeholder='Value' [(ngModel)]='searchValue.serveurunix'>
+            </mat-form-field>
+          </div>
+          <div mat-menu-item mat-filter-item [disableRipple]='true'>
+            <button mat-raised-button (click)="clearColumn('serveurunix')">Clear</button>
+            <button mat-raised-button color="primary" (click)="applyFilter()">Search</button>
+          </div>
+        </mat-menu>
+      </th>
+      <td mat-cell *matCellDef="let user"> {{user.serveurunix}} </td>
+    </ng-container>
+
+
+    <!-- loginunix Column -->
+    <ng-container matColumnDef='loginunix'>
+      <th mat-header-cell *matHeaderCellDef>
+        <div class='header'>
+          loginunix.
+          <button mat-button class='btn-toggle' [matMenuTriggerFor]='menu'>
+            <mat-icon>keyboard_arrow_down</mat-icon>
+          </button>
+        </div>
+        <mat-menu #menu>
+          <div mat-menu-item mat-filter-item [disableRipple]='true' class='menu-title'>
+            loginunix.
+          </div>
+          <div mat-menu-item mat-filter-item [disableRipple]='true'>
+            <mat-form-field>
+              <mat-select [panelClass]="'mat-elevation-z10'" placeholder='Conditions'
+                [(value)]='searchCondition.loginunix'>
+                <mat-option *ngFor='let  condition of conditionsList' [value]='condition.value'>{{condition.label}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div mat-menu-item mat-filter-item [disableRipple]='true'>
+            <mat-form-field>
+              <input matInput placeholder='Value' [(ngModel)]='searchValue.loginunix'>
+            </mat-form-field>
+          </div>
+          <div mat-menu-item mat-filter-item [disableRipple]='true'>
+            <button mat-raised-button (click)="clearColumn('loginunix')">Clear</button>
+            <button mat-raised-button color="primary" (click)="applyFilter()">Search</button>
+          </div>
+        </mat-menu>
+      </th>
+      <td mat-cell *matCellDef="let user"> {{user.loginunix}} </td>
+    </ng-container>
+
+
+
+
+    <!--///////////////////////////////////////////////////////////////////////-->
+
+
+    <!-- datedecreation Column -->
+    <ng-container matColumnDef='datedecreation'>
+      <th mat-header-cell *matHeaderCellDef>
+        <div class='header'>
+          datedecreation.
+          <button mat-button class='btn-toggle' [matMenuTriggerFor]='menu'>
+            <mat-icon>keyboard_arrow_down</mat-icon>
+          </button>
+        </div>
+        <mat-menu #menu>
+          <div mat-menu-item mat-filter-item [disableRipple]='true' class='menu-title'>
+            datedecreation.
+          </div>
+          <div mat-menu-item mat-filter-item [disableRipple]='true'>
+            <mat-form-field>
+              <mat-select [panelClass]="'mat-elevation-z10'" placeholder='Conditions'
+                [(value)]='searchCondition.datedecreation'>
+                <mat-option *ngFor='let  condition of conditionsList' [value]='condition.value'>{{condition.label}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div mat-menu-item mat-filter-item [disableRipple]='true'>
+            <mat-form-field>
+              <input matInput placeholder='Value' [(ngModel)]='searchValue.datedecreation'>
+            </mat-form-field>
+          </div>
+          <div mat-menu-item mat-filter-item [disableRipple]='true'>
+            <button mat-raised-button (click)="clearColumn('datedecreation')">Clear</button>
+            <button mat-raised-button color="primary" (click)="applyFilter()">Search</button>
+          </div>
+        </mat-menu>
+      </th>
+      <td mat-cell *matCellDef="let user"> {{user.datedecreation}} </td>
+    </ng-container>
+
+
+
+
+
+    <!--///////////////////////////////////////////////////////////////////////-->
+
+
+    <!-- auteurcreation Column -->
+    <ng-container matColumnDef='auteurcreation'>
+      <th mat-header-cell *matHeaderCellDef>
+        <div class='header'>
+          auteurcreation.
+          <button mat-button class='btn-toggle' [matMenuTriggerFor]='menu'>
+            <mat-icon>keyboard_arrow_down</mat-icon>
+          </button>
+        </div>
+        <mat-menu #menu>
+          <div mat-menu-item mat-filter-item [disableRipple]='true' class='menu-title'>
+            auteurcreation.
+          </div>
+          <div mat-menu-item mat-filter-item [disableRipple]='true'>
+            <mat-form-field>
+              <mat-select [panelClass]="'mat-elevation-z10'" placeholder='Conditions'
+                [(value)]='searchCondition.auteurcreation'>
+                <mat-option *ngFor='let  condition of conditionsList' [value]='condition.value'>{{condition.label}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div mat-menu-item mat-filter-item [disableRipple]='true'>
+            <mat-form-field>
+              <input matInput placeholder='Value' [(ngModel)]='searchValue.auteurcreation'>
+            </mat-form-field>
+          </div>
+          <div mat-menu-item mat-filter-item [disableRipple]='true'>
+            <button mat-raised-button (click)="clearColumn('auteurcreation')">Clear</button>
+            <button mat-raised-button color="primary" (click)="applyFilter()">Search</button>
+          </div>
+        </mat-menu>
+      </th>
+      <td mat-cell *matCellDef="let user"> {{user.auteurcreation}} </td>
+    </ng-container>
+
+
+
+
+    <!--///////////////////////////////////////////////////////////////////////-->
+
+
+    <!-- datedemodification Column -->
+    <ng-container matColumnDef='datedemodification'>
+      <th mat-header-cell *matHeaderCellDef>
+        <div class='header'>
+          datedemodification.
+          <button mat-button class='btn-toggle' [matMenuTriggerFor]='menu'>
+            <mat-icon>keyboard_arrow_down</mat-icon>
+          </button>
+        </div>
+        <mat-menu #menu>
+          <div mat-menu-item mat-filter-item [disableRipple]='true' class='menu-title'>
+            datedemodification.
+          </div>
+          <div mat-menu-item mat-filter-item [disableRipple]='true'>
+            <mat-form-field>
+              <mat-select [panelClass]="'mat-elevation-z10'" placeholder='Conditions'
+                [(value)]='searchCondition.datedemodification'>
+                <mat-option *ngFor='let  condition of conditionsList' [value]='condition.value'>{{condition.label}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div mat-menu-item mat-filter-item [disableRipple]='true'>
+            <mat-form-field>
+              <input matInput placeholder='Value' [(ngModel)]='searchValue.datedemodification'>
+            </mat-form-field>
+          </div>
+          <div mat-menu-item mat-filter-item [disableRipple]='true'>
+            <button mat-raised-button (click)="clearColumn('datedemodification')">Clear</button>
+            <button mat-raised-button color="primary" (click)="applyFilter()">Search</button>
+          </div>
+        </mat-menu>
+      </th>
+      <td mat-cell *matCellDef="let user"> {{user.datedemodification}} </td>
+    </ng-container>
+
+
+
+    <!--///////////////////////////////////////////////////////////////////////-->
+
+
+    <!-- auteurdemodification Column -->
+    <ng-container matColumnDef='auteurdemodification'>
+      <th mat-header-cell *matHeaderCellDef>
+        <div class='header'>
+          auteurdemodification.
+          <button mat-button class='btn-toggle' [matMenuTriggerFor]='menu'>
+            <mat-icon>keyboard_arrow_down</mat-icon>
+          </button>
+        </div>
+        <mat-menu #menu>
+          <div mat-menu-item mat-filter-item [disableRipple]='true' class='menu-title'>
+            auteurdemodification.
+          </div>
+          <div mat-menu-item mat-filter-item [disableRipple]='true'>
+            <mat-form-field>
+              <mat-select [panelClass]="'mat-elevation-z10'" placeholder='Conditions'
+                [(value)]='searchCondition.auteurdemodification'>
+                <mat-option *ngFor='let  condition of conditionsList' [value]='condition.value'>{{condition.label}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div mat-menu-item mat-filter-item [disableRipple]='true'>
+            <mat-form-field>
+              <input matInput placeholder='Value' [(ngModel)]='searchValue.auteurdemodification'>
+            </mat-form-field>
+          </div>
+          <div mat-menu-item mat-filter-item [disableRipple]='true'>
+            <button mat-raised-button (click)="clearColumn('auteurdemodification')">Clear</button>
+            <button mat-raised-button color="primary" (click)="applyFilter()">Search</button>
+          </div>
+        </mat-menu>
+      </th>
+      <td mat-cell *matCellDef="let user"> {{user.auteurdemodification}} </td>
+    </ng-container>
+
+
+
+
+    <!--///////////////////////////////////////////////////////////////////////-->
+
+
+    <!-- refmyaccess Column -->
+    <ng-container matColumnDef='refmyaccess'>
+      <th mat-header-cell *matHeaderCellDef>
+        <div class='header'>
+          refmyaccess.
+          <button mat-button class='btn-toggle' [matMenuTriggerFor]='menu'>
+            <mat-icon>keyboard_arrow_down</mat-icon>
+          </button>
+        </div>
+        <mat-menu #menu>
+          <div mat-menu-item mat-filter-item [disableRipple]='true' class='menu-title'>
+            refmyaccess.
+          </div>
+          <div mat-menu-item mat-filter-item [disableRipple]='true'>
+            <mat-form-field>
+              <mat-select [panelClass]="'mat-elevation-z10'" placeholder='Conditions'
+                [(value)]='searchCondition.refmyaccess'>
+                <mat-option *ngFor='let  condition of conditionsList' [value]='condition.value'>{{condition.label}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div mat-menu-item mat-filter-item [disableRipple]='true'>
+            <mat-form-field>
+              <input matInput placeholder='Value' [(ngModel)]='searchValue.refmyaccess'>
+            </mat-form-field>
+          </div>
+          <div mat-menu-item mat-filter-item [disableRipple]='true'>
+            <button mat-raised-button (click)="clearColumn('refmyaccess')">Clear</button>
+            <button mat-raised-button color="primary" (click)="applyFilter()">Search</button>
+          </div>
+        </mat-menu>
+      </th>
+      <td mat-cell *matCellDef="let user"> {{user.refmyaccess}} </td>
+    </ng-container>
+    <!--///////////////////////////////////////////////////////////////////////-->
+
+
+
+    <!-- tchaines Column -->
+    <ng-container matColumnDef='tchaines'>
+      <th mat-header-cell *matHeaderCellDef>
+        <div class='header'>
+          tchaines.
+          <button mat-button class='btn-toggle' [matMenuTriggerFor]='menu'>
+            <mat-icon>keyboard_arrow_down</mat-icon>
+          </button>
+        </div>
+        <mat-menu #menu>
+          <div mat-menu-item mat-filter-item [disableRipple]='true' class='menu-title'>
+            tchaines.
+          </div>
+          <div mat-menu-item mat-filter-item [disableRipple]='true'>
+            <mat-form-field>
+              <mat-select [panelClass]="'mat-elevation-z10'" placeholder='Conditions'
+                [(value)]='searchCondition.tchaines'>
+                <mat-option *ngFor='let  condition of conditionsList' [value]='condition.value'>{{condition.label}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div mat-menu-item mat-filter-item [disableRipple]='true'>
+            <mat-form-field>
+              <input matInput placeholder='Value' [(ngModel)]='searchValue.tchaines'>
+            </mat-form-field>
+          </div>
+          <div mat-menu-item mat-filter-item [disableRipple]='true'>
+            <button mat-raised-button (click)="clearColumn('tchaines')">Clear</button>
+            <button mat-raised-button color="primary" (click)="applyFilter()">Search</button>
+          </div>
+        </mat-menu>
+      </th>
+      <td mat-cell *matCellDef="let user"><span *ngFor="let chain of user.tchaines">
+        <mat-accordion>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+        <mat-panel-title>
+         Chaines
+        </mat-panel-title>
+        <mat-panel-description>
+          Liste des chaines pour ce user
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+        <mat-label>     {{chain.id}} </mat-label>
+        <mat-label>      {{chain.nomdelachaine}}</mat-label>
+        <mat-label>      {{chain.shortname}}</mat-label>
+        <mat-label>      {{chain.outildetest}}</mat-label>
+        <mat-label>      {{chain.accesauxchaines}}</mat-label>
+         <br>
+
+
+        </mat-expansion-panel>
+      </mat-accordion>
+           </span> </td>
+
+    </ng-container>
+
+
+    <!-- refmyaccess Column
+    <ng-container matColumnDef='refmyaccess'>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header='refmyaccess'> refmyaccess </th>
+      <td mat-cell *matCellDef='let user'> {{user.refmyaccess}} </td>
+    </ng-container>
+
+-->
+
+
+    <tr mat-header-row *matHeaderRowDef="userDisplayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: userDisplayedColumns;"></tr>
+
+  </table>
+
+
+
+</mat-card-content>
+
+<mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]">
+</mat-paginator>

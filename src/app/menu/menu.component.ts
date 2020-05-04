@@ -17,14 +17,13 @@ export class MenuComponent implements OnInit {
 
   ]);
 
-  private nomdelabdd: string;//Alim 4 base par variable
+  private nomdelabdd: string; // Alim 4 bases par variable
   constructor() { }
 
   ngOnInit() {
   }
 
   onSelectMenu(menuFormvalue) {
-    alert(menuFormvalue);
   }
 
 }

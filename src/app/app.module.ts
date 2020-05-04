@@ -15,13 +15,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DemoMaterialModule } from './material-module';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { MAT_RADIO_DEFAULT_OPTIONS } from '@angular/material';
-import { ChainComponent } from './chain/chain.component';
+import { ChainComponent } from './addchain/addchain.component';
 import { AppRoutingModule } from './app-routing.module'; //TODO: ajouter routing
 
-import { UserComponent } from './user/user.component';
+import { UserComponent } from './adduser/adduser.component';
 import { UserListComponent } from './userlist/userlist.component';
-import { ChainlistComponent } from './chainlist/chainlist.component';
+import { ChainlistComponent } from './listchain/listchain.component';
 import { MenuComponent } from './menu/menu.component';
+import { UserchainComponent } from './listuserchain/listuserchain.component';
+
 
 ///// menu déroulant ////
 import { MatMenuModule, MatButtonModule, MatIconModule, MatCardModule } from '@angular/material';
@@ -29,19 +31,19 @@ import { MatMenuModule, MatButtonModule, MatIconModule, MatCardModule } from '@a
 ///// filtres ////
 import { FilterItemDirective } from './filter-item.directive';
 
-import { AlimbddvarComponent } from './alimbddvar/alimbddvar.component';
-import { BddlistparamComponent } from './bddlistparam/bddlistparam.component';
+import { AlimbddvarComponent } from './addaccesstochain/addaccesstochain.component';
+import { BddlistparamComponent } from './listbdd/listbdd.component';
 
 
-import {AlimentityComponent} from './alimentity/alimentity.component';
-import {EntitylistComponent} from './entitylist/entitylist.component';
+import {AlimentityComponent} from './addentity/addentity.component';
+import {EntitylistComponent} from './listentity/entitylist.component';
 
-import { AlimoutildetestComponent } from './alimoutildetest/alimoutildetest.component';
-import { OutilDeTestlistComponent } from './outildetestlist/outildetest.component';
+import { AlimoutildetestComponent } from './addtesttool/alimoutildetest.component';
+import { OutilDeTestlistComponent } from './listtesttool/listtesttool.component';
 
 
-import {AlimserveurunixComponent} from './alimserveurunix/alimserveurunix.component';
-import {ServeurunixlistComponent} from './serveurunixlist/serveurunixlist.component';
+import {AlimserveurunixComponent} from './addunixserver/addunixserver.component';
+import {ServeurunixlistComponent} from './listserverunix/listserverunix.component';
 
 
 
@@ -54,6 +56,7 @@ import {ServeurunixlistComponent} from './serveurunixlist/serveurunixlist.compon
     UserComponent,
     ChainComponent,
     UserListComponent,
+    UserchainComponent,
     MenuComponent,//menu deroulant
     FilterItemDirective, AlimbddvarComponent,//fitre
     FilterItemDirective, BddlistparamComponent,//fitre

@@ -1,0 +1,292 @@
+<app-menu></app-menu>
+
+
+
+<section fxLayout="row wrap" fxLayoutAlign="center center">
+  <mat-card fxFlex="1000px" fxFlex.xs="100%">
+    <form [formGroup]="chainForm" novalidate (ngSubmit)="onCreateChain(chainForm.value)" fxLayout="column wrap"
+      fxLayoutAlign="center center" fxLayoutGap="10px">
+      <mat-card-header>
+        <mat-card-title>Formumaire saisie d une CHAINE</mat-card-title>
+        <mat-card-subtitle>formulaire 222</mat-card-subtitle>
+      </mat-card-header>
+
+
+
+
+
+      <mat-card-content>
+
+
+
+        <mat-form-field style="margin-right: 10px;">
+          <mat-label> nomdelachaine : </mat-label>
+          <input matInput #input maxlength="6" placeholder="Nom du nomdelachaine" formControlName="nomdelachaine"
+            required>
+          <mat-hint>6 caractères maximum.</mat-hint>
+          <mat-hint align="end">{{input.value?.length || 0}}/6</mat-hint>
+          <mat-error *ngIf="hasError('nomdelachaine', 'required')">Saisie obligatoire</mat-error>
+          <mat-error *ngIf="hasError('nomdelachaine', 'maxlength')">Le nomdelachaine saisi dépasse 6 caractères
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field style="margin-right: 10px;">
+          <mat-label> Nom : </mat-label>
+          <input matInput placeholder="shortname" formControlName="shortname" maxlength="11" required>
+          <mat-hint align="end">{{input.value?.length || 0}}/11</mat-hint>
+          <mat-hint>11 caractères maximum.</mat-hint>
+          <mat-error *ngIf="hasError('shortname', 'required')">Saisie obligatoire</mat-error>
+          <mat-error *ngIf="hasError('shortname', 'maxlength')">La shortname saisie dépasse 11 caractères</mat-error>
+        </mat-form-field>
+
+
+        <mat-form-field style="margin-right: 10px;" appearance="fill">
+          <mat-label> Accesauxchaines : </mat-label>
+          <mat-select formControlName="accesauxchaines" required>
+            <mat-option value={{accesauxchaines}} *ngFor="let accesauxchaines of typesOfAccesAuxChaines  | async">
+              {{accesauxchaines}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+
+        <mat-form-field style="margin-right: 10px;">
+          <mat-label> codeenvironnement : </mat-label>
+          <input matInput #input maxlength="6" placeholder="Nom du codeenvironnement"
+            formControlName="codeenvironnement" required>
+          <mat-hint>6 caractères maximum.</mat-hint>
+          <mat-hint align="end">{{input.value?.length || 0}}/6</mat-hint>
+          <mat-error *ngIf="hasError('codeenvironnement', 'required')">Saisie obligatoire</mat-error>
+          <mat-error *ngIf="hasError('codeenvironnement', 'maxlength')">Le iud saisi dépasse 6 caractères</mat-error>
+        </mat-form-field>
+
+        <mat-form-field style="margin-right: 10px;">
+          <mat-label> ibmexportpath : </mat-label>
+          <input matInput #input maxlength="256" placeholder="Nom du ibmexportpath" formControlName="ibmexportpath"
+            required>
+          <mat-hint>6 caractères maximum.</mat-hint>
+          <mat-hint align="end">{{input.value?.length || 0}}/256</mat-hint>
+          <mat-error *ngIf="hasError('ibmexportpath', 'required')">Saisie obligatoire</mat-error>
+          <mat-error *ngIf="hasError('ibmexportpath', 'maxlength')">Le iud saisi dépasse 6 caractères</mat-error>
+        </mat-form-field>
+
+        <mat-form-field style="margin-right: 10px;">
+          <mat-label> buildpath : </mat-label>
+          <input matInput #input maxlength="6" placeholder="Nom du buildpath" formControlName="buildpath" required>
+          <mat-hint>6 caractères maximum.</mat-hint>
+          <mat-hint align="end">{{input.value?.length || 0}}/6</mat-hint>
+          <mat-error *ngIf="hasError('buildpath', 'required')">Saisie obligatoire</mat-error>
+          <mat-error *ngIf="hasError('buildpath', 'maxlength')">Le iud saisi dépasse 6 caractères</mat-error>
+        </mat-form-field>
+
+        <mat-form-field style="margin-right: 10px;">
+          <mat-label> rpmpath : </mat-label>
+          <input matInput #input maxlength="6" placeholder="Nom du rpmpath" formControlName="rpmpath" required>
+          <mat-hint>6 caractères maximum.</mat-hint>
+          <mat-hint align="end">{{input.value?.length || 0}}/6</mat-hint>
+          <mat-error *ngIf="hasError('rpmpath', 'required')">Saisie obligatoire</mat-error>
+          <mat-error *ngIf="hasError('rpmpath', 'maxlength')">Le iud saisi dépasse 6 caractères</mat-error>
+        </mat-form-field>
+
+        <mat-form-field style="margin-right: 10px;">
+          <mat-label> langage : </mat-label>
+          <input matInput #input maxlength="6" placeholder="Nom du langage" formControlName="langage" required>
+          <mat-hint>6 caractères maximum.</mat-hint>
+          <mat-hint align="end">{{input.value?.length || 0}}/6</mat-hint>
+          <mat-error *ngIf="hasError('langage', 'required')">Saisie obligatoire</mat-error>
+          <mat-error *ngIf="hasError('langage', 'maxlength')">Le iud saisi dépasse 6 caractères</mat-error>
+        </mat-form-field>
+
+
+
+        <mat-form-field style="margin-right: 10px;" appearance="fill">
+          <mat-label> Select me outildetest : </mat-label>
+          <mat-select formControlName="outildetest" required>
+
+            <mat-option value={{outildetest}} *ngFor="let outildetest of typesOfOutilDeTest  | async">
+              {{outildetest}}
+            </mat-option>
+            <!--      </mat-selection-list>-->
+          </mat-select>
+        </mat-form-field>
+
+
+
+
+        <mat-form-field style="margin-right: 10px;">
+          <mat-label> version : </mat-label>
+          <input matInput #input maxlength="6" placeholder="Nom du version" formControlName="version" required>
+          <mat-hint>6 caractères maximum.</mat-hint>
+          <mat-hint align="end">{{input.value?.length || 0}}/6</mat-hint>
+          <mat-error *ngIf="hasError('version', 'required')">Saisie obligatoire</mat-error>
+          <mat-error *ngIf="hasError('version', 'maxlength')">Le iud saisi dépasse 6 caractères</mat-error>
+        </mat-form-field>
+
+        <!--
+
+       -->
+        <mat-radio-group  class="format-radio-group" #rGroup formControlName="sed" required style="margin-right: 10px;">
+      <mat-label style="margin-right: 10px;" class="mat-radio-label"> Is sed : </mat-label>
+          <mat-radio-button class="format-radio-button" value="Non" radioGroup="rGroup">Non</mat-radio-button>
+          <mat-radio-button class="format-radio-button" value="Générable" radioGroup="rGroup">Générable</mat-radio-button>
+          <mat-radio-button class="format-radio-button" value="Non Générable" radioGroup="rGroup">Non Générable</mat-radio-button>
+        </mat-radio-group>
+
+
+
+        <!--
+////////////////////////////////////////////   KO
+
+
+<mat-checkbox>Check me!</mat-checkbox>
+-->
+
+
+        <mat-checkbox formControlName="optiondecimal" formControlName="optiondecimal">optiondecimal</mat-checkbox>
+
+
+
+        <!--
+        <mat-label class="mat-radio-label"> is optiondecimal: </mat-label>
+        <mat-radio-group #rGroup formControlName="optiondecimal" required style="margin-right: 10px;">
+
+          <mat-radio-button value=true radioGroup="rGroup">Vrai</mat-radio-button>
+          <mat-radio-button value=false radioGroup="rGroup">Faux</mat-radio-button>
+        </mat-radio-group>
+
+-->
+
+        <!--
+
+<mat-checkbox formControlName="optionpmml" (change)="checkboxChange('True')" [checked]="chainForm.controls.optionpmml.value == 'True'">Active</mat-checkbox>
+<mat-checkbox formControlName="optionpmml" (change)="checkboxChange('False')" [checked]="chainForm.controls.optionpmml.value == 'False'">Inactive</mat-checkbox>
+
+-->
+
+        <mat-checkbox formControlName="optionpmml" formControlName="optionpmml">optionpmml</mat-checkbox>
+
+
+        <!--
+        <mat-label class="mat-radio-label"> Is optionpmml : </mat-label>
+        <input matInput #input maxlength="256" placeholder="optionpmml" formControlName="optionpmml" required value=false>
+        <mat-checkbox [checked]="isCheckedoptionpmml">checked test</mat-checkbox>
+
+
+        <mat-checkbox>IS optionpmml!</mat-checkbox>
+
+
+
+////////////////////////////////////////////   KO
+-->
+
+
+        <mat-form-field style="margin-right: 10px;">
+          <mat-label> Is callsed : </mat-label>
+          <mat-label>Select me for Is callsed </mat-label>
+          <mat-select formControlName="callsed" required>
+            <mat-option value="REST">REST</mat-option>
+            <mat-option value="SOAP">SOAP</mat-option>
+          </mat-select>
+          <mat-hint align="end">Here's the dropdown arrow ^</mat-hint>
+        </mat-form-field>
+
+
+
+
+
+
+
+
+        <mat-form-field style="margin-right: 10px;">
+          <mat-label> applicationappelante : </mat-label>
+          <input matInput #input maxlength="256" placeholder="Nom du applicationappelante"
+            formControlName="applicationappelante" required>
+          <mat-hint>6 caractères maximum.</mat-hint>
+          <mat-hint align="end">{{input.value?.length || 0}}/256</mat-hint>
+          <mat-error *ngIf="hasError('applicationappelante', 'required')">Saisie obligatoire</mat-error>
+          <mat-error *ngIf="hasError('applicationappelante', 'maxlength')">Le applicationappelante saisi dépasse 6
+            caractères</mat-error>
+        </mat-form-field>
+
+
+        <mat-form-field style="margin-right: 10px;">
+          <mat-label> business : </mat-label>
+          <input matInput #input maxlength="256" placeholder="Nom du business" formControlName="business" required>
+          <mat-hint>6 caractères maximum.</mat-hint>
+          <mat-hint align="end">{{input.value?.length || 0}}/256</mat-hint>
+          <mat-error *ngIf="hasError('business', 'required')">Saisie obligatoire</mat-error>
+          <mat-error *ngIf="hasError('business', 'maxlength')">Le iud saisi dépasse 6 caractères</mat-error>
+        </mat-form-field>
+
+
+
+
+        <mat-checkbox formControlName="prod" formControlName="prod">prod</mat-checkbox>
+
+
+
+        <mat-radio-group class="format-radio-group"  #rGroup formControlName="groupe" required style="margin-right: 10px;">
+          <mat-label style="margin-right: 10px;" class="mat-radio-label"> groupe : </mat-label>
+          <mat-radio-button class="format-radio-button" value="G1" radioGroup="rGroup">G1</mat-radio-button>
+          <mat-radio-button class="format-radio-button" value="G2" radioGroup="rGroup">G2</mat-radio-button>
+          <mat-radio-button class="format-radio-button"  value="G3" radioGroup="rGroup">G3</mat-radio-button>
+        </mat-radio-group>
+
+
+
+
+
+        <mat-form-field style="margin-right: 10px" class="invisible">
+          <mat-label> Date de création : </mat-label>
+          <input matInput placeholder="datedecreation" formControlName="datedecreation"
+            value="2020-03-10T10:02:47.531+0000">
+          <mat-hint>DATE xx caractères maximum.</mat-hint>
+        </mat-form-field>
+
+
+        <mat-form-field style="margin-right: 10px;" class="invisible">
+          <mat-label> Auteur de Création : </mat-label>
+          <input matInput placeholder="auteurcreation du auteurcreation" formControlName="auteurcreation">
+          <mat-hint>xx caractères maximum.</mat-hint>
+          <mat-error *ngIf="hasError('auteurcreation', 'required')">Saisie obligatoire</mat-error>
+          <mat-error *ngIf="hasError('auteurcreation', 'maxlength')">Le iud saisi dépasse x caractères</mat-error>
+        </mat-form-field>
+
+
+
+
+
+        <mat-form-field style="margin-right: 10px;">
+          <mat-label> datedemodification : </mat-label>
+          <input matInput #input maxlength="6" placeholder="Nom du datedemodification"
+            formControlName="datedemodification">
+        </mat-form-field>
+
+
+        <mat-form-field style="margin-right: 10px;">
+          <mat-label> auteurdemodification : </mat-label>
+          <input matInput #input maxlength="6" placeholder="Nom du auteurdemodification"
+            formControlName="auteurdemodification" required>
+          <mat-hint>6 caractères maximum.</mat-hint>
+          <mat-hint align="end">{{input.value?.length || 0}}/6</mat-hint>
+          <mat-error *ngIf="hasError('auteurdemodification', 'required')">Saisie obligatoire</mat-error>
+          <mat-error *ngIf="hasError('auteurdemodification', 'maxlength')">Le iud saisi dépasse 6 caractères</mat-error>
+        </mat-form-field>
+        <!--
+      -->
+
+
+        <mat-card-actions align="left">
+          <button type="button" mat-raised-button color="warn" (click)="onCancel()">Annuler</button>
+
+          <button mat-raised-button color="primary" [disabled]="!chainForm.valid"
+            style="margin-left: 15px;">Enregistrer</button>
+
+        </mat-card-actions>
+
+
+
+      </mat-card-content>
+    </form>
+  </mat-card>
+</section>

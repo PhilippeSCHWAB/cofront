@@ -19,17 +19,13 @@ export class EntityService {
   };
 
   private entity: Entity[] = [];
-  /*entity: Observable<Entity[]>;
- */
+
   private URL_BDDS = 'http://localhost:8080/api/entity';
   private URL_BDDS2 = 'http://localhost:8080/api/entity/1201';
 
   constructor(
     private http: HttpClient) {
-    /*
-      this.getEntitysObservable();
-      this.entity = this.getEntitysObservable();
-  */
+
   }
 
 
@@ -49,7 +45,7 @@ export class EntityService {
 
 
 
-  /**
+   /**
     * Get timeline Card
     * @return Card
     */
@@ -69,27 +65,34 @@ export class EntityService {
     return throwError(errorMessage);
   }
 
+
+
   public create(entity: Entity): Observable<Entity> {
-    return this.http.post<Entity>(this.URL_BDDS, entity, this.httpOptions);
-  }
+    try {
+      return this.http.post<Entity>(this.URL_BDDS, entity, this.httpOptions);
+    } catch (exception) {
+      console.log('Message d erreur entityService 74!!! \n' + exception);
+    }
+    }
 
-
-
-  /**
- * Update a entity
- * @return
- */
 
   public update(entity: Entity): Observable<Entity> {
-
-  //  alert('update entity : '+ entity);
-    return this.http.put<Entity>(this.URL_BDDS2, entity, this.httpOptions);
+    try {
+      return this.http.put<Entity>(this.URL_BDDS2, entity, this.httpOptions);
+    } catch (exception) {
+      console.log('Message d erreur entityService 84!!! \n' + exception);
+    }
   }
 
 
 
-
-
+  public delete(entity: Entity): Observable<Entity> {
+   try {
+      return this.http.put<Entity>(this.URL_BDDS2, entity, this.httpOptions);
+    } catch (exception) {
+      console.log('Message d erreur entityService 94!!! \n' + exception);
+    }
+  }
 
 
 

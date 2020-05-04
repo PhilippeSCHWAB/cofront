@@ -1,0 +1,80 @@
+<a>
+  LISTE DES SERVEURS UNIX
+</a>
+
+
+<section fxLayoutAlign="center center">
+  <mat-card>
+    <mat-card-header fxLayoutAlign="center center">
+      <mat-card-title>{{ 'HOME.TITLE'}}</mat-card-title>
+
+      <br>
+      <a [routerLink]="['/newserveurunix']" mat-raised-button color="primary">{{ 'Ajout ' }}</a>
+    </mat-card-header>
+
+
+
+
+    <mat-card-content>
+
+      <table mat-table [dataSource]="dataSourceServeurUnix" matSort style="width: 100%;">
+
+
+        <!-- IUD Column -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header="id"> id </th>
+          <td mat-cell *matCellDef="let serveurunix"> {{serveurunix.id}} </td>
+        </ng-container>
+
+        <!-- NAME serveurunix -->
+        <ng-container matColumnDef="serveurunix">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header="serveurunix"> serveurunix </th>
+          <td mat-cell *matCellDef="let serveurunix"> {{serveurunix.serveurunix}} </td>
+        </ng-container>
+
+        <!-- createdAt Column -->
+        <ng-container matColumnDef="createdAt">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header="createdAt"> createdAt </th>
+          <td mat-cell *matCellDef="let serveurunix"> {{serveurunix.createdAt}} </td>
+        </ng-container>
+
+        <!-- updatedAt Column -->
+        <ng-container matColumnDef="updatedAt">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header="updatedAt"> updatedAt </th>
+          <td mat-cell *matCellDef="let serveurunix"> {{serveurunix.updatedAt}} </td>
+        </ng-container>
+
+        <!-- Editer Column -->
+        <ng-container matColumnDef='edit'>
+          <th mat-header-cell *matHeaderCellDef> Editer </th>
+          <td mat-cell *matCellDef='let serveurunix'>
+            <mat-card-actions align='left'>
+
+              <a [routerLink]="['/serveurunix', serveurunix.id]" mat-raised-button color="primary">Editer</a>
+            </mat-card-actions>
+          </td>
+        </ng-container>
+
+        <!-- //////-->
+
+        <!-- Supprimer Column -->
+        <ng-container matColumnDef='delete'>
+          <th mat-header-cell *matHeaderCellDef> Supprimer </th>
+          <td mat-cell *matCellDef='let serveurunix'>
+            <mat-card-actions align='left'>
+              <a mat-raised-button color='primary' (click)='onDeleteServeurUnix(serveurunix.id)'>Supprimer</a>
+            </mat-card-actions>
+          </td>
+        </ng-container>
+        <!-- //////
+
+-->
+        <tr mat-header-row *matHeaderRowDef="serveurunixDisplayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: serveurunixDisplayedColumns;"></tr>
+
+      </table>
+    </mat-card-content>
+
+
+  </mat-card>
+</section>

@@ -1,29 +1,37 @@
-import { Component, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, OnInit, Output, ViewChild, SystemJsNgModuleLoader } from '@angular/core';
 import { UserService } from '../service/user.service';
 import { FormBuilder } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { User } from '../interface/interfaceUser';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
-import { ActivatedRoute } from '@angular/router';//update
-/*
-import { deleteTimelinesTestObservable() } from '../games.service';
-*/
+import { ActivatedRoute } from '@angular/router'; // update
+
 
 export const CONDITIONS_LIST = [
-
-  { value: 'nono', label: 'Nono' },
+  { value: 'is-content', label: 'Is Content' },
+  { value: 'is-no-content', label: 'Is no Content' },
   { value: 'is-empty', label: 'Is empty' },
   { value: 'is-not-empty', label: 'Is not empty' },
   { value: 'is-equal', label: 'Is equal' },
   { value: 'is-not-equal', label: 'Is not equal' },
   { value: 'is-grand-than', label: 'is gran than' },
-  /* { value: 'is-contained', label: 'is contained' },*/
 ];
 
 export const CONDITIONS_FUNCTIONS = { // search method base on conditions list value
 
 
-
+  'is-content': function (value, filterdValue) {
+    const index = value.indexOf(filterdValue);
+    if (index < 0) {
+      return false;
+    }
+  },
+  'is-no-content': function (value, filterdValue) {
+    const index = value.indexOf(filterdValue);
+    if (index > 0) {
+      return false;
+    }
+  },
   'is-empty': function (value, filterdValue) {
     return value === '';
   },
@@ -31,19 +39,15 @@ export const CONDITIONS_FUNCTIONS = { // search method base on conditions list v
     return value !== '';
   },
   'is-equal': function (value, filterdValue) {
+
     return value == filterdValue;
   },
   'is-not-equal': function (value, filterdValue) {
     return value != filterdValue;
   },
-
   'is-grand-than': function (value, filterdValue) {
     return value >= filterdValue;
   },
-  /*
-    'is-contained': function (value, filterdValue) {
-      return value == indexof(filterdValue);
-    },*/
 };
 
 
@@ -61,8 +65,7 @@ export class UserListComponent implements OnInit {
   public searchValue: any = {};
   public searchCondition: any = {};
   private filterMethods = CONDITIONS_FUNCTIONS;
-
-
+  value: any;
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
@@ -78,12 +81,6 @@ export class UserListComponent implements OnInit {
   paramIud: string; // update
 
 
-  /*
-  filterForm = this.formBuilder.group({
-    iudFilterSelected: ''
-  })
-
-*/
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
@@ -103,141 +100,134 @@ export class UserListComponent implements OnInit {
       accesauxchaines: '',
       serveurunix: '',
       loginunix: '',
-      datedecreation: '',
-      auteurcreation: '',
-      datedemodification: '',
-      auteurdemodification: '',
       refmyaccess: '',
+      tchaines: '',
     });
   }
 
   ngOnInit() {
+    try {
+      this.userDisplayedColumns = ['iud', 'nom', 'prenom', 'email', 'entite', 'ismanager', 'emailmanager',
+        'isadmin', 'accesauxchaines', 'serveurunix', 'loginunix', /*'datedecreation', 'auteurcreation',
+      'datedemodification', 'auteurdemodification', */'refmyaccess', 'tchaines', 'edit', 'addchainforuser', 'delete'];
 
-    this.userDisplayedColumns = ['iud', 'nom', 'prenom', 'email', 'entite', 'ismanager', 'emailmanager',
-      'isadmin', 'accesauxchaines', 'serveurunix', 'loginunix', 'datedecreation', 'auteurcreation',
-      'datedemodification', 'auteurdemodification', 'refmyaccess', 'edit', 'addchainforuser', 'delete'];
+      this.dataSourceUser = new MatTableDataSource();
 
-    this.dataSourceUser = new MatTableDataSource();
+      this.dataSourceUser.filterPredicate = (p: User, filtre: any) => {
+        let result = true;
+        const keys = Object.keys(p); // keys of the object data
 
-    this.dataSourceUser.filterPredicate = (p: User, filtre: any) => {
-      let result = true;
-      let keys = Object.keys(p); // keys of the object data
+        for (const key of keys) {
+          const searchCondition = filtre.conditions[key]; // get search filter method
 
-      for (const key of keys) {
-        let searchCondition = filtre.conditions[key]; // get search filter method
-
-        if (searchCondition && searchCondition !== 'none') {
-          if (filtre.methods[searchCondition](p[key], filtre.values[key]) === false) { // invoke search filter
-            result = false // if one of the filters method not succeed the row will be remove from the filter result
-            break;
+          if (searchCondition && searchCondition !== 'none') {
+            if (filtre.methods[searchCondition](p[key], filtre.values[key]) === false) { // invoke search filter
+              result = false; // if one of the filters method not succeed the row will be remove from the filter result
+              break;
+            }
           }
         }
-      }
-      return result
-    };
+        return result;
+      };
 
-    this.dataSourceUser.paginator = this.paginator;
-    this.dataSourceUser.sort = this.sort;
-    this.displayUserGrid();
-
+      this.dataSourceUser.paginator = this.paginator;
+      this.dataSourceUser.sort = this.sort;
+      this.displayUserGrid();
 
 
-  }
+    } catch (exception) {
+      console.log('Message d erreur userList 144!!! \n' + exception);
+    }
 
-
-
-
-
-  onNewUser() {
-    console.log('NewUser!');
   }
 
 
   displayUserGrid() {
-    // Load timeline list from the associate service
-    // and subscribe to the callback when loading complete
-    this.userService.getUsers().subscribe(dataList => {
-      this.dataSourceUser.data = dataList;
-    });
-  }
-  /*
-    onFilter(filteringValues) {
-      alert('filteringValues :' + filteringValues.iudFilterSelected);
-      this.users = this.userService.
-        getFilteredUserList(filteringValues.iudFilterSelected);
+    try {
+      // Load timeline list from the associate service
+      // and subscribe to the callback when loading complete
+      this.userService.getUsers().subscribe(dataList => {
+        this.dataSourceUser.data = dataList;
+      });
+      //  alert(this.dataSourceUser.data.values);
+    } catch (exception) {
+      console.log('Message d erreur UserList 159!!! \n' + exception);
     }
-  */
-
-  deleteUser(userid) {
-    // alert(userid);OTO
-
-    this.userService.delete(userid
-    ).subscribe(DeletedUser => console.log(DeletedUser));
-
   }
+
+
 
   onDeleteUser(userid) {
-    alert(userid);
-    console.log(userid);
-    this.userService.delete(userid).subscribe(() => this.users = this.displayUserGrid());
-    //alert('avant rzfresy ' +useriud);
+    try {
+      this.userService.delete(userid).subscribe(() => this.users = this.displayUserGrid());
+    } catch (exception) {
+      console.log('Message d erreur UserList 179!!! \n' + exception);
+    }
   }
-
-
-
 
 
   onEditUser(userid) {
-    alert(userid);
+    //  alert(userid);
   }
 
 
 
   AddChainForUser(user: User) {
-    console.log('AddChainForUser! : ' + user.id);
-    console.log('AddChainForUser! : ' + user.iud);
-    console.log('AddChainForUser! : ' + user.nom);
-
-
-    this.userService.user = user;
-
+    try {
+      this.userService.user = user;
+    } catch (exception) {
+      console.log('Message d erreur UserList 179!!! \n' + exception);
+    }
   }
 
 
-
-
-
-
-
   clickMethod(userid: string) {
-    if (confirm('Are you sure to delete :' + userid)) {
-      console.log(this.onDeleteUser(userid));
+    try {
+      if (confirm('Are you sure to delete :' + userid)) {
+      }
+    } catch (exception) {
+      console.log('Message d erreur UserList 204!!! \n' + exception);
     }
   }
 
 
   displayTimelinUserListGrid() {
-    // Load timeline list from the associate service
-    // and subscribe to the callback when loading complete
-    this.userService.getUsers().subscribe(dataList => {
-      this.dataSourceUser.data = dataList;
-    });
+    try {    // Load timeline list from the associate service
+      // and subscribe to the callback when loading complete
+      this.userService.getUsers().subscribe(dataList => {
+        this.dataSourceUser.data = dataList;
+      });
+    } catch (exception) {
+      console.log('Message d erreur UserList 216!!! \n' + exception);
+    }
   }
 
-  //filter
+
+  // filter
+
   applyFilter() {
-    let searchFilter: any = {
-      values: this.searchValue,
-      conditions: this.searchCondition,
-      methods: this.filterMethods
-    };
-    this.dataSourceUser.filter = searchFilter;
+    try {
+      const searchFilter: any = {
+        values: this.searchValue,
+        conditions: this.searchCondition,
+        methods: this.filterMethods
+      };
+      this.dataSourceUser.filter = searchFilter;
+    } catch (exception) {
+      console.log('Message d erreur UserList 233!!! \n' + exception);
+    }
   }
-  //filter
+
+  // filter
   clearColumn(columnKey: string): void {
-    this.searchValue[columnKey] = null;
-    this.searchCondition[columnKey] = 'none';
-    this.applyFilter();
+    try {
+      this.searchValue[columnKey] = null;
+      this.searchCondition[columnKey] = 'none';
+      this.applyFilter();
+    } catch (exception) {
+      console.log('Message d erreur UserList 243!!! \n' + exception);
+    }
+
   }
 
 

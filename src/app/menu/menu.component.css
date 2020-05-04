@@ -1,14 +1,25 @@
 
+.example-button-row button
+{
+  margin-right: 20px;
+  margin-left: 10px;
+}
+.example-menu-row button
+{
+  margin-right: 40px;
+}
 
 
 .menuBardemoBasicUsage .page-container {
-  padding: 32px; }
+  padding: 10px; }
 
 .menuBardemoBasicUsage .page {
   margin: 0 auto;
-  padding: 24px;
+  padding: 12px;
   max-width: 680px;
-  box-shadow: 0px 1px 2px 1px rgba(0, 0, 0, 0.25); }
+  box-shadow: 0px 1px 4px 1px rgba(0, 0, 0, 0.25);
+  margin-right: 8px; }
+
 
 .menuBardemoBasicUsage .page h1 {
   text-align: center;
@@ -20,7 +31,9 @@
   line-height: 1.6rem; }
 
 .myMenu{
-
   display: flex;
-
   }
+  .mat-card-title {
+    display: block;
+    margin-right: 8px;
+}

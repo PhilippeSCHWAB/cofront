@@ -5,10 +5,7 @@ Angular CLI: 8.3.25
 Node: 12.16.2
 OS: linux x64
 Angular: 8.2.14
-... animations, common, compiler, compiler-cli, core, forms
-... language-service, platform-browser, platform-browser-dynamic
-... router
-
+npm install -g @angular/cli
 
 visual Studio Code 1.44.2
 
@@ -29,7 +26,8 @@ typescript                        3.5.3
 webpack                           4.39.2
 
 
-Angular.material is loaded by definition in app-module.ts (no specific install)
+Angular.material
+npm install -g @angular/cli
 
 ## launch
 

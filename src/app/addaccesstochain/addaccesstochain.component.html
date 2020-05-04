@@ -1,0 +1,43 @@
+<app-menu></app-menu>
+
+
+
+
+<section fxLayout="row wrap" fxLayoutAlign="center center">
+  <mat-card fxFlex="1000px" fxFlex.xs="100%">
+    <form [formGroup]="bddForm" novalidate (ngSubmit)="onSubmitBdd(bddForm.value)" fxLayout="column wrap"
+      fxLayoutAlign="center center" fxLayoutGap="10px">
+      <mat-card-header>
+        <mat-card-title>{{formTitleLabel}}</mat-card-title>
+        <mat-card-subtitle>{{formSubtitleLabel}}</mat-card-subtitle>
+      </mat-card-header>
+
+
+
+      <mat-card-content>
+<!--
+        <mat-form-field style="margin-right: 10px;">
+          <input matInput placeholder="ID 08h07" formControlName="id" disabled=false value=0>
+        </mat-form-field>
+-->
+
+       <mat-form-field style="margin-right: 10px;">
+          <input matInput placeholder="accesauxchaines" formControlName="accesauxchaines" required>
+          <mat-hint>2 caractères minimum.</mat-hint>
+          <mat-error *ngIf="hasError('accesauxchaines', 'required')">Saisie obligatoire</mat-error>
+          <mat-error *ngIf="hasError('accesauxchaines', 'maxlength')">La access aux chaines saisie dépasse 255
+            caractères
+          </mat-error>
+        </mat-form-field>
+
+      </mat-card-content>
+
+
+      <mat-card-actions align="left">
+        <button type="button" mat-raised-button color="warn" (click)="onCancel()">Annuler</button>
+        <button mat-raised-button color="primary" [disabled]="!bddForm.valid"
+          style="margin-left: 15px;">Enregistrer</button>
+      </mat-card-actions>
+    </form>
+  </mat-card>
+</section>

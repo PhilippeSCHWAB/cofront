@@ -1,23 +1,35 @@
+
+
+ <!--
+<h3>Menu</h3>
+-->
 <mat-card class="myMenu">
 
 
-  <mat-card-title>
-    Menu
-  </mat-card-title>
 
-
+  <div class="example-menu-row">
+    <mat-card-title>
+      Menu
+      <br>
+      --------
+    </mat-card-title>
+  </div>
+ <!--
+-->
   <mat-card-content>
     <!--   -->
 
-    <button mat-raised-button color="primary" [matMenuTriggerFor]="menu1">
-      User
-      <!--   -->
-    </button>
+    <div class="example-button-row">
+      <button mat-raised-button color="primary" [matMenuTriggerFor]="menu1">
+        User
+        <!--   -->
+      </button>
+    </div>
     <mat-menu #menu1="matMenu">
       <a mat-list-item routerLink="/newuser">
         <button mat-menu-item>
           <mat-icon>create</mat-icon>
-          <span>Create U</span>
+          <span>Create</span>
         </button>
       </a>
       <a mat-list-item routerLink="/userlist">
@@ -31,14 +43,16 @@
 
 
   <mat-card-content>
-    <button mat-raised-button color="primary" [matMenuTriggerFor]="menu2  ">
-      Chain
-    </button>
+    <div class="example-button-row">
+      <button mat-raised-button color="primary" [matMenuTriggerFor]="menu2  ">
+        Chain
+      </button>
+    </div>
     <mat-menu #menu2="matMenu">
       <a mat-list-item routerLink="/chain">
         <button mat-menu-item>
           <mat-icon>create</mat-icon>
-          <span>Create L</span>
+          <span>Create</span>
         </button>
       </a>
       <a mat-list-item routerLink="/chainlist">
@@ -55,9 +69,12 @@
 
 
   <mat-card-content>
-    <button mat-raised-button color="primary" [matMenuTriggerFor]="menu3">
-      Static
-    </button>
+    <div class="example-button-row">
+      <button mat-raised-button color="primary" [matMenuTriggerFor]="menu3">
+        Static
+      </button>
+    </div>
+
     <mat-menu #menu3="matMenu">
       <button mat-menu-item>
         <mat-icon>create</mat-icon>
@@ -74,9 +91,11 @@
 
 
   <mat-card-content>
-    <button mat-raised-button color="primary" [matMenuTriggerFor]="menu4">
-      Setting
-    </button>
+    <div class="example-button-row">
+      <button mat-raised-button color="primary" [matMenuTriggerFor]="menu4">
+        Setting
+      </button>
+    </div>
     <!--
     <mat-menu #menu4="matMenu">
 
@@ -98,7 +117,7 @@
       <a mat-list-item routerLink="/newbdd">
         <button mat-menu-item>
           <mat-icon>create</mat-icon>
-          <span>Create Access Aux chaines</span>
+          <span>Create</span>
         </button>
       </a>
       <a mat-list-item routerLink="/bddList">
@@ -114,7 +133,7 @@
       <a mat-list-item routerLink="/newentity">
         <button mat-menu-item>
           <mat-icon>create</mat-icon>
-          <span>Create Entity</span>
+          <span>Create</span>
         </button>
       </a>
       <a mat-list-item routerLink="/entityList">
@@ -136,7 +155,7 @@
       <a mat-list-item routerLink="/newoutildetest">
         <button mat-menu-item>
           <mat-icon>create</mat-icon>
-          <span>Create Entity</span>
+          <span>Create</span>
         </button>
       </a>
       <a mat-list-item routerLink="/outildetestList">
@@ -149,10 +168,10 @@
 
 
     <mat-menu #mserveurunix="matMenu">
-     <a mat-list-item routerLink="/newserveurunix">
+      <a mat-list-item routerLink="/newserveurunix">
         <button mat-menu-item>
           <mat-icon>create</mat-icon>
-          <span>Create Entity</span>
+          <span>Create</span>
         </button>
       </a>
       <a mat-list-item routerLink="/serveurunixList">

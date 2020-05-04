@@ -1,4 +1,4 @@
-import { Chain } from './interfaceChain';
+import { TChaines} from './interfaceTChain';
 
 export interface User {
 
@@ -19,5 +19,5 @@ export interface User {
   datedemodification: string;
   auteurdemodification: string;
   refmyaccess: number;
-  chain: Chain;
+  tchaines: TChaines;
 }

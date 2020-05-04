@@ -1,24 +1,29 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { UserComponent } from './user/user.component';
-import { ChainComponent } from './chain/chain.component';
+import { UserComponent } from './adduser/adduser.component';
+import { ChainComponent } from './addchain/addchain.component';
 import { UserListComponent } from './userlist/userlist.component';
-import { ChainlistComponent } from './chainlist/chainlist.component';
+import { ChainlistComponent } from './listchain/listchain.component';
 import { MenuComponent } from './menu/menu.component';
-import { AlimbddvarComponent } from './alimbddvar/alimbddvar.component';
-import { BddlistparamComponent } from './bddlistparam/bddlistparam.component';
-import {EntitylistComponent} from './entitylist/entitylist.component';
-import {AlimentityComponent} from './alimentity/alimentity.component';
+import { AlimbddvarComponent } from './addaccesstochain/addaccesstochain.component';
+import { BddlistparamComponent } from './listbdd/listbdd.component';
+import {EntitylistComponent} from './listentity/entitylist.component';
+import {AlimentityComponent} from './addentity/addentity.component';
 
-import {AlimoutildetestComponent} from './alimoutildetest/alimoutildetest.component';
-import { OutilDeTestlistComponent } from './outildetestlist/outildetest.component';
+import {AlimoutildetestComponent} from './addtesttool/alimoutildetest.component';
+import { OutilDeTestlistComponent } from './listtesttool/listtesttool.component';
 
-import { AlimserveurunixComponent} from './alimserveurunix/alimserveurunix.component';
-import { ServeurunixlistComponent } from './serveurunixlist/serveurunixlist.component';
+import { AlimserveurunixComponent} from './addunixserver/addunixserver.component';
+import { ServeurunixlistComponent } from './listserverunix/listserverunix.component';
+
+import { UserchainComponent } from './listuserchain/listuserchain.component';
+import { TopBarComponent } from './top-bar/top-bar.component';
+
 
 const routes: Routes = [
+{ path: '', component: TopBarComponent},
 
-   { path: '', component: MenuComponent},
+ //  { path: '', component: MenuComponent},
 
   { path: 'userlist', component: UserListComponent },
   { path: 'user/:user.id', component: UserComponent},
@@ -43,6 +48,9 @@ const routes: Routes = [
   { path: 'serveurunixList', component: ServeurunixlistComponent},
   { path: 'serveurunix/:serveurunix.id', component: AlimserveurunixComponent},
   { path: 'newserveurunix',  component: AlimserveurunixComponent},
+
+
+  { path: 'userchain', component: UserchainComponent},
 
 ];
 
