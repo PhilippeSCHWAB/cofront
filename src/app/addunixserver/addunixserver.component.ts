@@ -86,7 +86,7 @@ export class AlimserveurunixComponent implements OnInit {
               this.formTitleLabel = 'Formulaire de modification SERVEUR UNIX';
               this.formSubtitleLabel = 'Modifier un Timeline';
             });
-          }          else {
+          } else {
             //  alert('ADD');
             this.actionFormStatus = 'ADD',
 
@@ -127,22 +127,26 @@ export class AlimserveurunixComponent implements OnInit {
 
 
   onSubmitServeurUnix(serveurunixFormValues) {
-    try {
+
     // Set Timeline values
     this.serveurunix.id = serveurunixFormValues.id;
     this.serveurunix.serveurunix = serveurunixFormValues.serveurunix;
-
-    if (this.actionFormStatus == 'ADD') {
-      this.serveurunixService.create(this.serveurunix).subscribe(() => this.location.back());
-    }
-    if (this.actionFormStatus == 'UPDATE') {
-      this.serveurunixService.update(this.serveurunix).subscribe(() => this.location.back());
-    }
-
+    try {
+      if (this.actionFormStatus == 'ADD') {
+        this.serveurunixService.create(this.serveurunix).subscribe(() => this.location.back());
+      }
     } catch (exception) {
       console.log('Message d erreur alimserveurunix 145!!! \n' + exception);
     }
-  }
+    this.serveurunix.serveurunix = serveurunixFormValues.serveurunix;
+    try {
+      if (this.actionFormStatus == 'UPDATE') {
+        this.serveurunixService.update(this.serveurunix).subscribe(() => this.location.back());
+      }
+    } catch (exception) {
+      console.log('Message d erreur alimserveurunix 145!!! \n' + exception);
+    }
+    }
 
   hasError = (controlName: string, errorName: string) => {
     return this.serveurunixForm.controls[controlName].hasError(errorName);

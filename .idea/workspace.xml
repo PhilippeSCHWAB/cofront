@@ -25,7 +25,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/app/interface" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/app" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
@@ -36,9 +36,10 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/app/interface" />
       <recent name="$PROJECT_DIR$/src/app" />
       <recent name="$PROJECT_DIR$/src/app/service" />
+      <recent name="$PROJECT_DIR$/src/app/app" />
+      <recent name="$PROJECT_DIR$/src/app/interface" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/app" />
@@ -94,6 +95,12 @@
       <workItem from="1584884491707" duration="415000" />
       <workItem from="1587284065250" duration="192000" />
       <workItem from="1587284280597" duration="10000" />
+      <workItem from="1588056908983" duration="2417000" />
+      <workItem from="1588060154370" duration="182000" />
+      <workItem from="1588060472805" duration="86000" />
+      <workItem from="1588062477335" duration="127000" />
+      <workItem from="1588140642602" duration="1520000" />
+      <workItem from="1588145688456" duration="205000" />
     </task>
     <servers />
   </component>
@@ -101,26 +108,26 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="776" y="310" width="424" height="484" key="FileChooserDialogImpl" timestamp="1587284194172">
+    <state x="776" y="310" width="424" height="484" key="FileChooserDialogImpl" timestamp="1588062498108">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state x="776" y="310" width="424" height="484" key="FileChooserDialogImpl/67.27.1853.1053@67.27.1853.1053" timestamp="1587284194172" />
-    <state width="1807" height="277" key="GridCell.Tab.0.bottom" timestamp="1584455052916">
+    <state x="776" y="310" width="424" height="484" key="FileChooserDialogImpl/67.27.1853.1053@67.27.1853.1053" timestamp="1588062498108" />
+    <state width="1807" height="277" key="GridCell.Tab.0.bottom" timestamp="1588143558177">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state width="1807" height="277" key="GridCell.Tab.0.bottom/67.27.1853.1053@67.27.1853.1053" timestamp="1584455052916" />
-    <state width="1807" height="277" key="GridCell.Tab.0.center" timestamp="1584455052916">
+    <state width="1807" height="277" key="GridCell.Tab.0.bottom/67.27.1853.1053@67.27.1853.1053" timestamp="1588143558177" />
+    <state width="1807" height="277" key="GridCell.Tab.0.center" timestamp="1588143558177">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state width="1807" height="277" key="GridCell.Tab.0.center/67.27.1853.1053@67.27.1853.1053" timestamp="1584455052916" />
-    <state width="1807" height="277" key="GridCell.Tab.0.left" timestamp="1584455052915">
+    <state width="1807" height="277" key="GridCell.Tab.0.center/67.27.1853.1053@67.27.1853.1053" timestamp="1588143558177" />
+    <state width="1807" height="277" key="GridCell.Tab.0.left" timestamp="1588143558177">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state width="1807" height="277" key="GridCell.Tab.0.left/67.27.1853.1053@67.27.1853.1053" timestamp="1584455052915" />
-    <state width="1807" height="277" key="GridCell.Tab.0.right" timestamp="1584455052916">
+    <state width="1807" height="277" key="GridCell.Tab.0.left/67.27.1853.1053@67.27.1853.1053" timestamp="1588143558177" />
+    <state width="1807" height="277" key="GridCell.Tab.0.right" timestamp="1588143558177">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state width="1807" height="277" key="GridCell.Tab.0.right/67.27.1853.1053@67.27.1853.1053" timestamp="1584455052916" />
+    <state width="1807" height="277" key="GridCell.Tab.0.right/67.27.1853.1053@67.27.1853.1053" timestamp="1588143558177" />
     <state width="498" height="446" key="SwitcherDM" timestamp="1584712350768">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
@@ -138,7 +145,7 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/app/alimserveurunix/alimserveurunix.component.ts</url>
+          <url>file://$PROJECT_DIR$/src/app/addunixserver/addunixserver.component.ts</url>
           <line>1</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
