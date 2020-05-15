@@ -133,7 +133,12 @@ export class AlimserveurunixComponent implements OnInit {
     this.serveurunix.serveurunix = serveurunixFormValues.serveurunix;
     try {
       if (this.actionFormStatus == 'ADD') {
+ /*
         this.serveurunixService.create(this.serveurunix).subscribe(() => this.location.back());
+
+this.serveurunixService.create(this.serveurunix).subscribe(() =>   location.replace('serveurunixList'));
+*/
+this.serveurunixService.create(this.serveurunix).subscribe(() =>   location.assign('serveurunixList'));
       }
     } catch (exception) {
       console.log('Message d erreur alimserveurunix 145!!! \n' + exception);
@@ -141,7 +146,10 @@ export class AlimserveurunixComponent implements OnInit {
     this.serveurunix.serveurunix = serveurunixFormValues.serveurunix;
     try {
       if (this.actionFormStatus == 'UPDATE') {
+  /*
         this.serveurunixService.update(this.serveurunix).subscribe(() => this.location.back());
+  */
+ this.serveurunixService.create(this.serveurunix).subscribe(() =>   location.assign('serveurunixList'));
       }
     } catch (exception) {
       console.log('Message d erreur alimserveurunix 145!!! \n' + exception);

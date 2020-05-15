@@ -1,3 +1,7 @@
+
+/*
+* This class manages the OutilDeTest object
+**/
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { TesttoolService } from '../service/testtool.service';
 import { FormBuilder } from '@angular/forms';
@@ -19,17 +23,20 @@ export class OutilDeTestlistComponent implements OnInit {
   dataSourceOutilDeTest: MatTableDataSource<OutilDeTest>;
   outildetestDisplayedColumns: string[];
 
-
-
+  /*
+  * Material : for pagination and Sort
+  **/
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   constructor(
-
     private outildetestService: TesttoolService,
-    // private route: ActivatedRoute
+
   ) { }
 
+  /*
+*  On Init HTML page : definition display columns create datasource for html
+**/
   ngOnInit() {
     try {
       this.outildetestDisplayedColumns = ['id', 'outildetest', 'createdAt', 'updatedAt', 'edit', 'delete'];
@@ -40,7 +47,9 @@ export class OutilDeTestlistComponent implements OnInit {
     }
   }
 
-
+ /*
+*  Get data from back by thje Service
+**/
   displayOutilDeTestGrid() {
     try {
       this.outildetestService.getOutilDeTests().subscribe(dataList => {
@@ -51,7 +60,9 @@ export class OutilDeTestlistComponent implements OnInit {
     }
   }
 
-
+ /*
+*  OnDelete selection in html send the ID to delete to back by the service
+**/
   onDeleteOutilDeTest(outildetestid) {
     try {
       this.outildetestService.delete(outildetestid).subscribe(() => this.displayOutilDeTestGrid());

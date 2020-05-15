@@ -107,10 +107,10 @@ export class AlimentityComponent implements OnInit {
       this.entity.entite = entityFormValues.entite;
 
       if (this.actionFormStatus === 'ADD') {
-        this.entityService.create(this.entity).subscribe(() => this.location.back());
+        this.entityService.create(this.entity).subscribe(() => location.assign('entityList'));
       }
       if (this.actionFormStatus === 'UPDATE') {
-        this.entityService.update(this.entity).subscribe(() => this.location.back());
+        this.entityService.update(this.entity).subscribe(() => location.assign('entityList'));
       }
     } catch (exception) {
       console.log('Message d erreur alimentity 116!!! \n' + exception);

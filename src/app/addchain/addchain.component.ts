@@ -217,7 +217,8 @@ export class ChainComponent implements OnInit {
 
   public onCancel = () => {
     try {
-      this.location.back();
+    //  this.location.back();
+      this.location.go('chainlist');
     } catch (exception) {
       console.log('Message d erreur chain 209!!! \n' + exception);
     }
@@ -240,11 +241,13 @@ export class ChainComponent implements OnInit {
       this.chainService.createChainsTestObservable(chain).subscribe(savedChain => console.log(savedChain));
       alert('L\'utilisateur est enregistré');
 
-      this.location.back();
+      //this.location.back();
+      this.location.go('chainlist');
     } catch (exception) {
       console.log('Message d erreur chain 245!!! \n' + exception);
     }
-    this.location.back();
+    //this.location.back();
+    this.location.go('chainlist');
   }
 
   isCheckedoptionpmml(valor) {

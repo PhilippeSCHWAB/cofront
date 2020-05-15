@@ -1,4 +1,6 @@
-
+/*
+* This class manages the OutilDeTest object
+**/
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ServeurUnixService } from '../service/unixserver.service';
 import { FormBuilder } from '@angular/forms';
@@ -21,6 +23,9 @@ export class ServeurunixlistComponent implements OnInit {
   serveurunixDisplayedColumns: string[];
 
 
+  /*
+  * Material : for pagination and Sort
+  **/
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
@@ -30,6 +35,9 @@ export class ServeurunixlistComponent implements OnInit {
     // private route: ActivatedRoute
   ) { }
 
+  /*
+*  On Init HTML page : definition display columns create datasource for html
+**/
   ngOnInit() {
     try {
       this.serveurunixDisplayedColumns = ['id', 'serveurunix', 'createdAt', 'updatedAt', 'edit', 'delete'];
@@ -40,7 +48,9 @@ export class ServeurunixlistComponent implements OnInit {
     }
   }
 
-
+ /*
+*  Get data from back by thje Service
+**/
   displayServeurUnixGrid() {
     try {
       this.serveurunixService.getServeurUnixs().subscribe(dataList => {
@@ -51,8 +61,10 @@ export class ServeurunixlistComponent implements OnInit {
     }
   }
 
-
-  onDeleteServeurUnix(serveurunixid) {
+v
+/*
+*  OnDelete selection in html send the ID to delete to back by the service
+**/  onDeleteServeurUnix(serveurunixid) {
     try {
       this.serveurunixService.delete(serveurunixid).subscribe(() => this.displayServeurUnixGrid());
     } catch (exception) {

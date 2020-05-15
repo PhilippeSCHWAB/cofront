@@ -159,10 +159,10 @@ export class AlimbddvarComponent implements OnInit {
     */
 
     if (this.actionFormStatus == 'ADD') {
-      this.bddService.create(this.bdd).subscribe(() => this.location.back());
+      this.bddService.create(this.bdd).subscribe(() => location.assign('bddList'));
     }
     if (this.actionFormStatus == 'UPDATE') {
-      this.bddService.update(this.bdd).subscribe(() => this.location.back());
+      this.bddService.update(this.bdd).subscribe(() => location.assign('bddList'));
     }
   }
 

@@ -124,10 +124,10 @@ export class AlimoutildetestComponent implements OnInit {
       this.outildetest.id = outildetestFormValues.id;
       this.outildetest.outildetest = outildetestFormValues.outildetest;
       if (this.actionFormStatus == 'ADD') {
-        this.outildetestService.create(this.outildetest).subscribe(() => this.location.back());
+        this.outildetestService.create(this.outildetest).subscribe(() => location.assign('outildetestList'));
       }
       if (this.actionFormStatus == 'UPDATE') {
-        this.outildetestService.update(this.outildetest).subscribe(() => this.location.back());
+        this.outildetestService.update(this.outildetest).subscribe(() =>location.assign('outildetestList'));
       }
     } catch (exception) {
       console.log('Message d erreur alimoutidetestunix 134!!! \n' + exception);

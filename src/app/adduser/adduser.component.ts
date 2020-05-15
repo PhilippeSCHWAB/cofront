@@ -228,7 +228,7 @@ export class UserComponent implements OnInit {
 
   public onCancel = () => {
     try {
-      this.location.back();
+     this.location.go('userlist');
     } catch (exception) {
       console.log('Message d erreur User 226!!! \n' + exception);
     }
@@ -246,7 +246,7 @@ export class UserComponent implements OnInit {
       }
       this.userService.createUsersTestObservable(user).subscribe(savedUser => console.log(savedUser));
       alert('L\'utilisateur est enregistré');
-      this.location.back();
+      this.location.go('userlist');
     } catch (exception) {
       console.log('Message d erreur User 258!!! \n' + exception);
     }
