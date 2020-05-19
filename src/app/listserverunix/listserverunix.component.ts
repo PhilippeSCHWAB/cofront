@@ -1,6 +1,4 @@
-/*
-* This class manages the OutilDeTest object
-**/
+
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ServeurUnixService } from '../service/unixserver.service';
 import { FormBuilder } from '@angular/forms';
@@ -9,7 +7,7 @@ import { ServeurUnix } from '../interface/interfaceUnixServer';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router'; // update
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-
+import { AuthenticationService } from '../service/authentication.service';
 
 @Component({
   selector: 'app-serveurunixlist',
@@ -22,23 +20,33 @@ export class ServeurunixlistComponent implements OnInit {
   dataSourceServeurUnix: MatTableDataSource<ServeurUnix>;
   serveurunixDisplayedColumns: string[];
 
+  isLoggedIn: boolean;
+  isReader: boolean;
+  isCreator: boolean;
+  isAdmin: boolean;
 
-  /*
-  * Material : for pagination and Sort
-  **/
+
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   constructor(
 
     private serveurunixService: ServeurUnixService,
-    // private route: ActivatedRoute
+    private loginService: AuthenticationService
   ) { }
 
-  /*
-*  On Init HTML page : definition display columns create datasource for html
-**/
   ngOnInit() {
+    this.loginService.userAdminRoles.subscribe(userRoles => {
+      this.isLoggedIn = false, error => console.log(error + 'erreur lors du subscribe 43');
+
+      this.isReader = userRoles.includes('ROLE_READER');
+      this.isCreator = userRoles.includes('ROLE_CREATOR');
+      this.isAdmin = userRoles.includes('ROLE_ADMIN');
+
+      if (userRoles && userRoles.length > 0) {
+        this.isLoggedIn = true;
+      }
+    });
     try {
       this.serveurunixDisplayedColumns = ['id', 'serveurunix', 'createdAt', 'updatedAt', 'edit', 'delete'];
       this.dataSourceServeurUnix = new MatTableDataSource();
@@ -48,30 +56,18 @@ export class ServeurunixlistComponent implements OnInit {
     }
   }
 
- /*
-*  Get data from back by thje Service
-**/
+
   displayServeurUnixGrid() {
-    try {
-      this.serveurunixService.getServeurUnixs().subscribe(dataList => {
-        this.dataSourceServeurUnix.data = dataList;
-      });
-    } catch (exception) {
-      console.log('Message d erreur serveurunixList 50!!! \n' + exception);
-    }
-  }
-
-v
-/*
-*  OnDelete selection in html send the ID to delete to back by the service
-**/  onDeleteServeurUnix(serveurunixid) {
-    try {
-      this.serveurunixService.delete(serveurunixid).subscribe(() => this.displayServeurUnixGrid());
-    } catch (exception) {
-      console.log('Message d erreur serveurunixList 59!!! \n' + exception);
-    }
+    this.serveurunixService.getServeurUnixs().subscribe(dataList => {
+      this.dataSourceServeurUnix.data = dataList, error => console.log(error + 'erreur lors du subscribe 46');
+    });
   }
 
 
+  onDeleteServeurUnix(serveurunixid) {
+    this.serveurunixService.delete(serveurunixid).subscribe(() => this.displayServeurUnixGrid()),
+      error => console.log(error + 'erreur lors du subscribe 53');
+
+  }
 
 }

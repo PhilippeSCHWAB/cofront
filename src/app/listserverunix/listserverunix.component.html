@@ -1,6 +1,4 @@
-<app-menu></app-menu>
-
-
+<app-top-bar></app-top-bar>
 <a>
   LISTE DES SERVEURS UNIX
 </a>
@@ -12,7 +10,7 @@
       <mat-card-title>{{ 'HOME.TITLE'}}</mat-card-title>
 
       <br>
-      <a [routerLink]="['/newserveurunix']" mat-raised-button color="primary">{{ 'Ajout ' }}</a>
+      <a [routerLink]="['/newserveurunix']" *ngIf="isCreator" mat-raised-button color="primary">{{ 'Ajout ' }}</a>
     </mat-card-header>
 
 
@@ -53,7 +51,7 @@
           <td mat-cell *matCellDef='let serveurunix'>
             <mat-card-actions align='left'>
 
-              <a [routerLink]="['/serveurunix', serveurunix.id]" mat-raised-button color="primary">Editer</a>
+              <a [routerLink]="['/serveurunix', serveurunix.id]" *ngIf="isCreator"mat-raised-button color="primary">Editer</a>
             </mat-card-actions>
           </td>
         </ng-container>
@@ -65,7 +63,7 @@
           <th mat-header-cell *matHeaderCellDef> Supprimer </th>
           <td mat-cell *matCellDef='let serveurunix'>
             <mat-card-actions align='left'>
-              <a mat-raised-button color='primary' (click)='onDeleteServeurUnix(serveurunix.id)'>Supprimer</a>
+              <a mat-raised-button color='primary' (click)='onDeleteServeurUnix(serveurunix.id)'*ngIf="isCreator">Supprimer</a>
             </mat-card-actions>
           </td>
         </ng-container>

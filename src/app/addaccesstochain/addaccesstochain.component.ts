@@ -88,7 +88,7 @@ export class AlimbddvarComponent implements OnInit {
         //  alert(this.paramId);
         if (params.get('bdd.id') != null) {
         //  alert('UPDATE');
-          this.actionFormStatus = 'UPDATE';
+          this.actionFormStatus = 'UPDATE', error => console.log(error + 'erreur lors du subscribe 91');
 
 
           this.bddForm = new FormGroup({
@@ -103,7 +103,7 @@ export class AlimbddvarComponent implements OnInit {
          //   alert(this.bdd.id + ' / ' + this.bdd.accesauxchaines + ' / ' + this.bdd.createdAt);
             this.bddForm.setValue({ id: this.bdd.id, accesauxchaines: this.bdd.accesauxchaines });
             this.formTitleLabel = 'Formulaire de modification 8:11';
-            this.formSubtitleLabel = 'Modifier un Timeline';
+            this.formSubtitleLabel = 'Modifier un Timeline', error => console.log(error + 'erreur lors du subscribe 106');
           });
         }
         else {
@@ -134,7 +134,7 @@ export class AlimbddvarComponent implements OnInit {
     // Load bdd list from the associate service
     // and subscribe to the callback when loading complete
     this.bddService.getBdds().subscribe(dataList => {
-      this.dataSourceBdd.data = dataList;
+      this.dataSourceBdd.data = dataList , error => console.log(error + 'erreur lors du subscribe 137');
     });
   }
 
@@ -159,10 +159,10 @@ export class AlimbddvarComponent implements OnInit {
     */
 
     if (this.actionFormStatus == 'ADD') {
-      this.bddService.create(this.bdd).subscribe(() => location.assign('bddList'));
+      this.bddService.create(this.bdd).subscribe(() => this.location.back()) , error => console.log(error + 'erreur lors du subscribe 161');
     }
     if (this.actionFormStatus == 'UPDATE') {
-      this.bddService.update(this.bdd).subscribe(() => location.assign('bddList'));
+      this.bddService.update(this.bdd).subscribe(() => this.location.back()) , error => console.log(error + 'erreur lors du subscribe 164');
     }
   }
 

@@ -1,5 +1,6 @@
-<app-menu></app-menu>
 
+
+<app-top-bar></app-top-bar>
 
 <a>
 LISTE DES OUTILS DE TEST
@@ -12,7 +13,7 @@ LISTE DES OUTILS DE TEST
       <mat-card-title>{{ 'HOME.TITLE'}}</mat-card-title>
 
       <br>
-      <a [routerLink]="['/newoutildetest']" mat-raised-button color="primary">{{ 'Ajout ' }}</a>
+      <a [routerLink]="['/newoutildetest']" *ngIf="isCreator" mat-raised-button color="primary">{{ 'Ajout ' }}</a>
     </mat-card-header>
 
 
@@ -41,36 +42,37 @@ LISTE DES OUTILS DE TEST
           <td mat-cell *matCellDef="let outildetest"> {{outildetest.createdAt}} </td>
         </ng-container>
 
-        <!-- updatedAt Column and button -->
+        <!-- updatedAt Column -->
         <ng-container matColumnDef="updatedAt">
           <th mat-header-cell *matHeaderCellDef mat-sort-header="updatedAt"> updatedAt </th>
           <td mat-cell *matCellDef="let outildetest"> {{outildetest.updatedAt}} </td>
         </ng-container>
 
-        <!-- Editer Column and button-->
+        <!-- Editer Column -->
         <ng-container matColumnDef='edit'>
           <th mat-header-cell *matHeaderCellDef> Editer </th>
           <td mat-cell *matCellDef='let outildetest'>
             <mat-card-actions align='left'>
 
-              <a [routerLink]="['/outildetest', outildetest.id]" mat-raised-button color="primary">Editer</a>
+              <a [routerLink]="['/outildetest', outildetest.id]" *ngIf="isCreator" mat-raised-button color="primary">Editer</a>
             </mat-card-actions>
           </td>
         </ng-container>
 
+        <!-- //////-->
 
-
-        <!-- Supprimer Column and button -->
+        <!-- Supprimer Column -->
         <ng-container matColumnDef='delete'>
           <th mat-header-cell *matHeaderCellDef> Supprimer </th>
           <td mat-cell *matCellDef='let outildetest'>
             <mat-card-actions align='left'>
-              <a mat-raised-button color='primary' (click)='onDeleteOutilDeTest(outildetest.id)'>Supprimer</a>
+              <a mat-raised-button color='primary' (click)='onDeleteOutilDeTest(outildetest.id)'*ngIf="isCreator">Supprimer</a>
             </mat-card-actions>
           </td>
         </ng-container>
+        <!-- //////
 
-
+-->
         <tr mat-header-row *matHeaderRowDef="outildetestDisplayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: outildetestDisplayedColumns;"></tr>
 

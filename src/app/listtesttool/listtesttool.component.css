@@ -8,3 +8,7 @@ th {
 td {
     text-align: center;
 }
+.mat-card-actions, .mat-card-content, .mat-card-subtitle {
+  display: initial;
+  margin-bottom: 16px;
+}

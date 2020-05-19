@@ -80,7 +80,7 @@ export class AlimoutildetestComponent implements OnInit {
 
               this.outildetestForm.setValue({ id: this.outildetest.id, outildetest: this.outildetest.outildetest });
               this.formTitleLabel = 'Formulaire de modification OUTIL DE TEST';
-              this.formSubtitleLabel = 'Modifier un Timeline';
+              this.formSubtitleLabel = 'Modifier un Timeline' , error => console.log(error + 'erreur lors du subscribe 86');
             });
           } else {
             this.actionFormStatus = 'ADD',
@@ -107,13 +107,11 @@ export class AlimoutildetestComponent implements OnInit {
 
 
   displayOutilDeTestGrid() {
-    try {
+
       this.outildetestService.getOutilDeTests().subscribe(dataList => {
-        this.dataSourceOutilDeTest.data = dataList;
+        this.dataSourceOutilDeTest.data = dataList , error => console.log(error + 'erreur lors du subscribe 112');
       });
-    } catch (exception) {
-      console.log('Message d erreur alimoutidetestunix 115!!! \n' + exception);
-    }
+
   }
 
 
@@ -124,10 +122,10 @@ export class AlimoutildetestComponent implements OnInit {
       this.outildetest.id = outildetestFormValues.id;
       this.outildetest.outildetest = outildetestFormValues.outildetest;
       if (this.actionFormStatus == 'ADD') {
-        this.outildetestService.create(this.outildetest).subscribe(() => location.assign('outildetestList'));
+        this.outildetestService.create(this.outildetest).subscribe(() => this.location.back()) , error => console.log(error + 'erreur lors du subscribe 91');
       }
       if (this.actionFormStatus == 'UPDATE') {
-        this.outildetestService.update(this.outildetest).subscribe(() =>location.assign('outildetestList'));
+        this.outildetestService.update(this.outildetest).subscribe(() => this.location.back()) , error => console.log(error + 'erreur lors du subscribe 91');
       }
     } catch (exception) {
       console.log('Message d erreur alimoutidetestunix 134!!! \n' + exception);

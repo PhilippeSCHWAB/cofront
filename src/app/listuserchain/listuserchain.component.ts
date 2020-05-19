@@ -87,7 +87,8 @@ export class UserchainComponent implements OnInit {
         this.isAvailable = true;
 
         this.userService.getFilteredUserList(this.iduser).subscribe(user => {
-          const userlist = []; userlist.push(user); this.dataSourceUser.data = userlist; console.log(user);
+          const userlist = []; userlist.push(user); this.dataSourceUser.data = userlist; console.log(user) ,
+          error => console.log(error + 'erreur lors du subscribe 91');
         });
       }
       this.userDisplayedColumns = ['iud', 'nom', 'prenom', 'email', 'entite', 'tchaines'];

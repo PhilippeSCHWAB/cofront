@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { User } from '../interface/interfaceUser';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { ActivatedRoute } from '@angular/router'; // update
-
+import { AuthenticationService } from '../service/authentication.service';
 
 export const CONDITIONS_LIST = [
   { value: 'is-content', label: 'Is Content' },
@@ -80,11 +80,17 @@ export class UserListComponent implements OnInit {
   formSubtitleLabel: string;  // update
   paramIud: string; // update
 
+  isLoggedIn: boolean;
+  isReader: boolean;
+  isCreator: boolean;
+  isAdmin: boolean;
+
 
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private loginService: AuthenticationService
   ) {
     this.users = this.userService.getUsers();
     this.userForm = this.formBuilder.group({
@@ -106,6 +112,21 @@ export class UserListComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.loginService.userAdminRoles.subscribe(userRoles => {
+      this.isLoggedIn = false, error => console.log(error + 'erreur lors du subscribe 43');
+
+      this.isReader = userRoles.includes('ROLE_READER');
+      //console.log(  this.isReader )
+      this.isCreator = userRoles.includes('ROLE_CREATOR');
+      //    console.log( this.isCreator )
+      this.isAdmin = userRoles.includes('ROLE_ADMIN');
+      //  console.log(  this.isAdmin  )
+
+
+      if (userRoles && userRoles.length > 0) {
+        this.isLoggedIn = true;
+      }
+    });
     try {
       this.userDisplayedColumns = ['iud', 'nom', 'prenom', 'email', 'entite', 'ismanager', 'emailmanager',
         'isadmin', 'accesauxchaines', 'serveurunix', 'loginunix', /*'datedecreation', 'auteurcreation',
@@ -143,26 +164,22 @@ export class UserListComponent implements OnInit {
 
 
   displayUserGrid() {
-    try {
+
       // Load timeline list from the associate service
       // and subscribe to the callback when loading complete
       this.userService.getUsers().subscribe(dataList => {
-        this.dataSourceUser.data = dataList;
+        this.dataSourceUser.data = dataList , error => console.log(error + 'erreur lors du subscribe 150');
       });
       //  alert(this.dataSourceUser.data.values);
-    } catch (exception) {
-      console.log('Message d erreur UserList 159!!! \n' + exception);
-    }
+
   }
 
 
 
   onDeleteUser(userid) {
-    try {
-      this.userService.delete(userid).subscribe(() => this.users = this.displayUserGrid());
-    } catch (exception) {
-      console.log('Message d erreur UserList 179!!! \n' + exception);
-    }
+
+      this.userService.delete(userid).subscribe(() => this.users = this.displayUserGrid()) , error => console.log(error + 'erreur lors du subscribe 160');
+
   }
 
 
@@ -192,14 +209,9 @@ export class UserListComponent implements OnInit {
 
 
   displayTimelinUserListGrid() {
-    try {    // Load timeline list from the associate service
-      // and subscribe to the callback when loading complete
       this.userService.getUsers().subscribe(dataList => {
-        this.dataSourceUser.data = dataList;
+        this.dataSourceUser.data = dataList , error => console.log(error + 'erreur lors du subscribe 192');
       });
-    } catch (exception) {
-      console.log('Message d erreur UserList 216!!! \n' + exception);
-    }
   }
 
 

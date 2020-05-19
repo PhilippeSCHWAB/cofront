@@ -5,8 +5,6 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { TopBarComponent } from './top-bar/top-bar.component';
 
-import { HttpClientModule } from '@angular/common/http';
-
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material';
@@ -46,7 +44,12 @@ import {AlimserveurunixComponent} from './addunixserver/addunixserver.component'
 import {ServeurunixlistComponent} from './listserverunix/listserverunix.component';
 
 
-
+import {LoginComponent} from './components/login/login.component';
+import {ReaderGuard} from './authentication/guards/reader.guard';
+import {CreatorGuard} from './authentication/guards/creator.guard';
+import {AdminGuard} from './authentication/guards/admin.guard';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {JwtInterceptor} from './authentication/http-interceptor/jwt.interceptor';
 
 @NgModule({
   declarations: [
@@ -69,6 +72,8 @@ import {ServeurunixlistComponent} from './listserverunix/listserverunix.componen
 
     FilterItemDirective, AlimserveurunixComponent,//fitre
     FilterItemDirective, ServeurunixlistComponent,//fitre
+
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -93,9 +98,14 @@ import {ServeurunixlistComponent} from './listserverunix/listserverunix.componen
   entryComponents: [],
   bootstrap: [AppComponent],
   // bootstrap: [],
-  providers: [
+  providers: [ReaderGuard, CreatorGuard, AdminGuard,
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },
     { provide: MAT_RADIO_DEFAULT_OPTIONS, useValue: { color: 'warn' } },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true
+    }
     // Autres valeurs [primary,accent,warn]
 
   ]

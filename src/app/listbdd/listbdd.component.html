@@ -13,7 +13,7 @@
       <mat-card-title>{{ 'HOME.TITLE'}}</mat-card-title>
 
       <br>
-      <a [routerLink]="['/newbdd']" mat-raised-button color="primary">{{ 'Ajout ' }}</a>
+      <a [routerLink]="['/newbdd']" *ngIf="isCreator" mat-raised-button color="primary">{{ 'Ajout ' }}</a>
     </mat-card-header>
 
 
@@ -54,7 +54,7 @@
           <td mat-cell *matCellDef='let bdd'>
             <mat-card-actions align='left'>
 
-              <a [routerLink]="['/bdd', bdd.id]" mat-raised-button color="primary">Editer</a>
+              <a [routerLink]="['/bdd', bdd.id]" *ngIf="isCreator"mat-raised-button color="primary">Editer</a>
             </mat-card-actions>
           </td>
         </ng-container>
@@ -66,7 +66,7 @@
           <th mat-header-cell *matHeaderCellDef> Supprimer </th>
           <td mat-cell *matCellDef='let bdd'>
             <mat-card-actions align='left'>
-              <a mat-raised-button color='primary' (click)='onDeleteBdd(bdd.id)'>Supprimer</a>
+              <a mat-raised-button color='primary' *ngIf="isCreator"(click)='onDeleteBdd(bdd.id)'>Supprimer</a>
             </mat-card-actions>
           </td>
         </ng-container>

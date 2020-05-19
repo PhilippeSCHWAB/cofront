@@ -1,5 +1,6 @@
 
-<app-menu></app-menu>
+<app-top-bar></app-top-bar>
+
 
 <mat-card-content>
 
@@ -348,9 +349,7 @@
 
     <!--///////////////////////////////////////////////////////////////////////-->
 
-
-
-
+    https://stackoverflow.com/questions/42681776/horizontally-center-a-mdl-button
     <!-- serveurunix Column -->
     <ng-container matColumnDef='serveurunix'>
       <th mat-header-cell *matHeaderCellDef>
@@ -687,11 +686,11 @@
     </ng-container>
 -->
     <!-- Editer Column -->
-    <ng-container matColumnDef='edit'>
+    <ng-container matColumnDef='edit' >
       <th mat-header-cell *matHeaderCellDef> Editer </th>
       <td mat-cell *matCellDef='let user'>
-        <mat-card-actions align='left'>
-          <a [routerLink]="['/user', user.id ]" (click)='onEditUser(user.id)' mat-raised-button
+        <mat-card-actions align=' justify'>
+          <a [routerLink]="['/user', user.id ]" (click)='onEditUser(user.id)'*ngIf="isCreator" mat-raised-button
             color='primary'>Editer</a>
 
         </mat-card-actions>
@@ -700,11 +699,11 @@
 
 
 
-    <ng-container matColumnDef='addchainforuser'>
+    <ng-container matColumnDef='addchainforuser' >
       <th mat-header-cell *matHeaderCellDef> addchainforuser </th>
       <td mat-cell *matCellDef='let user'>
-        <mat-card-actions align='left'>
-          <a [routerLink]="['/chainlist' ]" (click)='AddChainForUser(user)' mat-raised-button
+        <mat-card-actions align=' justify'>
+          <a [routerLink]="['/chainlist' ]" (click)='AddChainForUser(user)'*ngIf="isCreator" mat-raised-button
             color='primary'>addchain<br>foruser</a>
         </mat-card-actions>
       </td>
@@ -712,11 +711,11 @@
 
 
 
-    <ng-container matColumnDef='delete'>
+    <ng-container matColumnDef='delete' >
       <th mat-header-cell *matHeaderCellDef> Supprimer </th>
       <td mat-cell *matCellDef='let user'>
-        <mat-card-actions align='left'>
-          <a mat-raised-button color='primary' (click)='clickMethod(user.id)'>Supprimer</a>
+        <mat-card-actions align=' justify'>
+          <a mat-raised-button color='primary' (click)='clickMethod(user.id)'*ngIf="isCreator">Supprimer</a>
         </mat-card-actions>
       </td>
     </ng-container>

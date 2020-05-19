@@ -1,72 +1,38 @@
 
- <mat-toolbar color="primary">
- <span>DiligenSE - Administation</span>
-</mat-toolbar>
 
-
-<!--
-<mat-sidenav-container class="sidenav-container">
-
-
-
-  <mat-sidenav-content>
-    <mat-toolbar color="primary">
-      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
-        *ngIf="isHandset$ | async">
-        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-      </button>
-      <span>DiligenSE - Administation</span>
-    </mat-toolbar>
-    <div class="content">
-      <router-outlet></router-outlet>
-    </div>
-  </mat-sidenav-content>
-
-
-  <mat-sidenav #drawer class="sidenav" fixedInViewport="true"
-    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'"
-    [opened]="!(isHandset$ | async)">
-    <mat-toolbar>Menu</mat-toolbar>
-    <mat-nav-list>
-      <a *ngIf="!isLoggedIn" mat-list-item routerLink="login">Connexion</a>
-      <a *ngIf="isLoggedIn" mat-list-item (click)="logOut()">Déconnexion</a>
-
-    </mat-nav-list>
-  </mat-sidenav>
-
-</mat-sidenav-container>
--->
-<!--
+ <!--
 <h3>Menu</h3>
-
 -->
+<mat-card class="myMenu">
 
-<mat-card class="myMenu" >
+
 
   <div class="example-menu-row">
     <mat-card-title>
       Menu
       <br>
-
+      --------
     </mat-card-title>
   </div>
-
-  <mat-card-content *ngIf="isLoggedIn">
+ <!--
+-->
+  <mat-card-content>
+    <!--   -->
 
     <div class="example-button-row">
       <button mat-raised-button color="primary" [matMenuTriggerFor]="menu1">
         User
-
+        <!--   -->
       </button>
     </div>
     <mat-menu #menu1="matMenu">
-      <a *ngIf="isCreator" mat-list-item routerLink="/newuser">
+      <a mat-list-item routerLink="/newuser">
         <button mat-menu-item>
           <mat-icon>create</mat-icon>
           <span>Create</span>
         </button>
       </a>
-      <a *ngIf="isReader" mat-list-item routerLink="/userlist">
+      <a mat-list-item routerLink="/userlist">
         <button mat-menu-item>
           <mat-icon>list</mat-icon>
           <span>List</span>
@@ -76,14 +42,14 @@
   </mat-card-content>
 
 
-  <mat-card-content *ngIf="isLoggedIn">
+  <mat-card-content>
     <div class="example-button-row">
       <button mat-raised-button color="primary" [matMenuTriggerFor]="menu2  ">
         Chain
       </button>
     </div>
     <mat-menu #menu2="matMenu">
-      <a *ngIf="isCreator" mat-list-item routerLink="/chain">
+      <a mat-list-item routerLink="/chain">
         <button mat-menu-item>
           <mat-icon>create</mat-icon>
           <span>Create</span>
@@ -102,7 +68,7 @@
 
 
 
-  <mat-card-content *ngIf="isLoggedIn">
+  <mat-card-content>
     <div class="example-button-row">
       <button mat-raised-button color="primary" [matMenuTriggerFor]="menu3">
         Static
@@ -110,12 +76,12 @@
     </div>
 
     <mat-menu #menu3="matMenu">
-      <button *ngIf="isCreator" mat-menu-item>
+      <button mat-menu-item>
         <mat-icon>create</mat-icon>
         <span>Create St</span>
       </button>
 
-      <button *ngIf="isReader" mat-menu-item>
+      <button mat-menu-item>
         <mat-icon>list</mat-icon>
         <span>List</span>
       </button>
@@ -124,13 +90,16 @@
 
 
 
-  <mat-card-content *ngIf="isLoggedIn">
+  <mat-card-content>
     <div class="example-button-row">
       <button mat-raised-button color="primary" [matMenuTriggerFor]="menu4">
         Setting
       </button>
     </div>
+    <!--
+    <mat-menu #menu4="matMenu">
 
+-->
     <mat-menu #menu4="matMenu">
       <button mat-menu-item [matMenuTriggerFor]="Setting">Base de Données</button>
 
@@ -145,7 +114,7 @@
 
     <mat-menu #maccesauxchaines="matMenu">
 
-      <a *ngIf="isCreator" mat-list-item routerLink="/newbdd">
+      <a mat-list-item routerLink="/newbdd">
         <button mat-menu-item>
           <mat-icon>create</mat-icon>
           <span>Create</span>
@@ -161,7 +130,7 @@
     </mat-menu>
 
     <mat-menu #mentite="matMenu">
-      <a *ngIf="isCreator" mat-list-item routerLink="/newentity">
+      <a mat-list-item routerLink="/newentity">
         <button mat-menu-item>
           <mat-icon>create</mat-icon>
           <span>Create</span>
@@ -183,7 +152,7 @@
 
 
     <mat-menu #moutildetest="matMenu">
-      <a *ngIf="isCreator" mat-list-item routerLink="/newoutildetest">
+      <a mat-list-item routerLink="/newoutildetest">
         <button mat-menu-item>
           <mat-icon>create</mat-icon>
           <span>Create</span>
@@ -199,35 +168,21 @@
 
 
     <mat-menu #mserveurunix="matMenu">
-      <a *ngIf="isCreator" mat-list-item routerLink="/newserveurunix">
+      <a mat-list-item routerLink="/newserveurunix">
         <button mat-menu-item>
           <mat-icon>create</mat-icon>
           <span>Create</span>
         </button>
       </a>
-      <a *ngIf="isReader" mat-list-item routerLink="/serveurunixList">
+      <a mat-list-item routerLink="/serveurunixList">
         <button mat-menu-item>
           <mat-icon>list</mat-icon>
           <span>List</span>
         </button>
       </a>
     </mat-menu>
+
+
   </mat-card-content>
-
-
-
-  <div class="login-menu-row">
-    <mat-card-content *ngIf="!isLoggedIn" mat-list-item routerLink="login">
-      <button mat-raised-button color="primary">
-        <span>Connexion</span>
-      </button>
-    </mat-card-content>
-
-    <mat-card-content *ngIf="isLoggedIn" mat-list-item (click)="logOut()">
-      <button mat-raised-button color="primary">
-        <span>Déconnexion</span>
-      </button>
-    </mat-card-content>
-  </div>
 
 </mat-card>

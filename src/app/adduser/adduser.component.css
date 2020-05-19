@@ -2,7 +2,9 @@
 
 
 .invisible{
+
   display: block;
+
   visibility: hidden;
   height: 0;
   width: 0;
@@ -10,34 +12,12 @@
 
 .mat-radio-label {
   cursor: pointer;
+/*
   display: inline-flex;
+
   align-items: center;
+
   white-space: nowrap;
   vertical-align: middle;
+  */
 }
-
-/*
-
-.mat-radio-button ~ .mat-radio-button {
-  margin-left: 16px;
-}
-
-.mat-form-field ~ .mat-form-field  {  margin-left: 16px;
-}
-
-
-.UserComponent {
-  margin-left: 16px;
-
-  }
-/*
-.example-form {
-  min-width: 150px;
-  max-width: 500px;
-  width: 100%;
-}
-
-.example-full-width {
-  width: 100%;
-}
-*/

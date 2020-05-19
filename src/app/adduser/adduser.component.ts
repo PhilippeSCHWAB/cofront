@@ -147,7 +147,7 @@ export class UserComponent implements OnInit {
                 refmyaccess: this.user.refmyaccess
               });
               this.formTitleLabel = 'Formulaire de modification 6:01';
-              this.formSubtitleLabel = 'Modifier un User';
+              this.formSubtitleLabel = 'Modifier un User' , error => console.log(error + 'erreur lors du subscribe 149');
 
 
             });
@@ -204,15 +204,13 @@ export class UserComponent implements OnInit {
 
 
   displayUserGrid() {
-    try {
+
       // Load user list from the associate service
       // and subscribe to the callback when loading complete
       this.userService.getUsers().subscribe(dataList => {
-        this.dataSourceUser.data = dataList;
+        this.dataSourceUser.data = dataList , error => console.log(error + 'erreur lors du subscribe 211');
       });
-    } catch (exception) {
-      console.log('Message d erreur User 221!!! \n' + exception);
-    }
+
   }
 
 
@@ -228,7 +226,7 @@ export class UserComponent implements OnInit {
 
   public onCancel = () => {
     try {
-     this.location.go('userlist');
+      this.location.back();
     } catch (exception) {
       console.log('Message d erreur User 226!!! \n' + exception);
     }
@@ -244,9 +242,10 @@ export class UserComponent implements OnInit {
       if (this.actionFormStatus === 'UPDATE') {
         user.datedemodification = new Date().toISOString();
       }
-      this.userService.createUsersTestObservable(user).subscribe(savedUser => console.log(savedUser));
+      this.userService.createUsersTestObservable(user).subscribe(savedUser => console.log(savedUser)) ,
+      error => console.log(error + 'erreur lors du subscribe 246');
       alert('L\'utilisateur est enregistré');
-      this.location.go('userlist');
+      this.location.back();
     } catch (exception) {
       console.log('Message d erreur User 258!!! \n' + exception);
     }

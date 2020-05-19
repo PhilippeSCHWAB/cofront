@@ -66,7 +66,7 @@ export class AlimentityComponent implements OnInit {
               this.dataSourceEntity = new MatTableDataSource();
               this.entityForm.setValue({ id: this.entity.id, entite: this.entity.entite });
               this.formTitleLabel = 'Formulaire de modification ENTITY';
-              this.formSubtitleLabel = 'Modifier un Timeline';
+              this.formSubtitleLabel = 'Modifier un Timeline' , error => console.log(error + 'erreur lors du subscribe 68');
             });
           } else {
             this.actionFormStatus = 'ADD',
@@ -90,13 +90,9 @@ export class AlimentityComponent implements OnInit {
 
 
   displayEntityGrid() {
-    try {
       this.entityService.getEntitys().subscribe(dataList => {
-        this.dataSourceEntity.data = dataList;
+        this.dataSourceEntity.data = dataList , error => console.log(error + 'erreur lors du subscribe 95');
       });
-    } catch (exception) {
-      console.log('Message d erreur alimentity 100!!! \n' + exception);
-    }
   }
 
 
@@ -105,12 +101,11 @@ export class AlimentityComponent implements OnInit {
       // Set Timeline values
       this.entity.id = entityFormValues.id;
       this.entity.entite = entityFormValues.entite;
-
       if (this.actionFormStatus === 'ADD') {
-        this.entityService.create(this.entity).subscribe(() => location.assign('entityList'));
+        this.entityService.create(this.entity).subscribe(() => this.location.back()) , error => console.log(error + 'erreur lors du subscribe 105');
       }
       if (this.actionFormStatus === 'UPDATE') {
-        this.entityService.update(this.entity).subscribe(() => location.assign('entityList'));
+        this.entityService.update(this.entity).subscribe(() => this.location.back()) , error => console.log(error + 'erreur lors du subscribe 105');
       }
     } catch (exception) {
       console.log('Message d erreur alimentity 116!!! \n' + exception);

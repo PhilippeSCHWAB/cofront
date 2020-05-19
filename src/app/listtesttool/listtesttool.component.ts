@@ -1,7 +1,3 @@
-
-/*
-* This class manages the OutilDeTest object
-**/
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { TesttoolService } from '../service/testtool.service';
 import { FormBuilder } from '@angular/forms';
@@ -10,7 +6,7 @@ import { OutilDeTest } from '../interface/interfaceTestTool';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router'; // update
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-
+import { AuthenticationService } from '../service/authentication.service';
 
 @Component({
   selector: 'app-outildetestlist',
@@ -23,21 +19,34 @@ export class OutilDeTestlistComponent implements OnInit {
   dataSourceOutilDeTest: MatTableDataSource<OutilDeTest>;
   outildetestDisplayedColumns: string[];
 
-  /*
-  * Material : for pagination and Sort
-  **/
+  isLoggedIn: boolean;
+  isReader: boolean;
+  isCreator: boolean;
+  isAdmin: boolean;
+
+
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   constructor(
-    private outildetestService: TesttoolService,
 
+    private outildetestService: TesttoolService,
+    private loginService: AuthenticationService
+    // private route: ActivatedRoute
   ) { }
 
-  /*
-*  On Init HTML page : definition display columns create datasource for html
-**/
   ngOnInit() {
+    this.loginService.userAdminRoles.subscribe(userRoles => {
+      this.isLoggedIn = false, error => console.log(error + 'erreur lors du subscribe 43');
+
+      this.isReader = userRoles.includes('ROLE_READER');
+      this.isCreator = userRoles.includes('ROLE_CREATOR');
+      this.isAdmin = userRoles.includes('ROLE_ADMIN');
+
+      if (userRoles && userRoles.length > 0) {
+        this.isLoggedIn = true;
+      }
+    });
     try {
       this.outildetestDisplayedColumns = ['id', 'outildetest', 'createdAt', 'updatedAt', 'edit', 'delete'];
       this.dataSourceOutilDeTest = new MatTableDataSource();
@@ -47,28 +56,17 @@ export class OutilDeTestlistComponent implements OnInit {
     }
   }
 
- /*
-*  Get data from back by thje Service
-**/
+
   displayOutilDeTestGrid() {
-    try {
       this.outildetestService.getOutilDeTests().subscribe(dataList => {
-        this.dataSourceOutilDeTest.data = dataList;
-      });
-    } catch (exception) {
-      console.log('Message d erreur outildetest 50!!! \n' + exception);
-    }
+        this.dataSourceOutilDeTest.data = dataList , error => console.log(error + 'erreur lors du subscribe 47');
+      })
   }
 
- /*
-*  OnDelete selection in html send the ID to delete to back by the service
-**/
+
   onDeleteOutilDeTest(outildetestid) {
-    try {
-      this.outildetestService.delete(outildetestid).subscribe(() => this.displayOutilDeTestGrid());
-    } catch (exception) {
-      console.log('Message d erreur outildetest 60!!! \n' + exception);
-    }
+      this.outildetestService.delete(outildetestid).subscribe(() => this.displayOutilDeTestGrid()) ,
+      error => console.log(error + 'erreur lors du subscribe 54');
   }
 
 

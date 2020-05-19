@@ -8,7 +8,7 @@ import { TChaines } from '../interface/interfaceTChain';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { User } from '../interface/interfaceUser';
 import { Location, getLocaleDateTimeFormat } from '@angular/common';
-
+import { AuthenticationService } from '../service/authentication.service';
 
 
 export const CONDITIONS_LIST = [
@@ -78,11 +78,17 @@ export class ChainlistComponent implements OnInit {
   chainForm: any;
   chains: any;
 
+  isLoggedIn: boolean;
+  isReader: boolean;
+  isCreator: boolean;
+  isAdmin: boolean;
+
   constructor(
     private formBuilder: FormBuilder,
     private chainService: TchainesService,
     private userService: UserService,
-    private location: Location
+    private location: Location,
+    private loginService: AuthenticationService
   ) {
 
     this.chains = this.chainService.getChains();
@@ -98,12 +104,23 @@ export class ChainlistComponent implements OnInit {
 
 
   ngOnInit() {
+    this.loginService.userAdminRoles.subscribe(userRoles => {
+      this.isLoggedIn = false, error => console.log(error + 'erreur lors du subscribe 43');
+
+      this.isReader = userRoles.includes('ROLE_READER');
+      this.isCreator = userRoles.includes('ROLE_CREATOR');
+      this.isAdmin = userRoles.includes('ROLE_ADMIN');
+
+      if (userRoles && userRoles.length > 0) {
+        this.isLoggedIn = true;
+      }
+    });
     try {
       if (this.userService.user === undefined) {
         this.isAvailable = false;
       } else {
         this.user = this.userService.user;
-      //  alert('00ddd : '+ this.user.chain.id);
+        //  alert('00ddd : '+ this.user.chain.id);
         this.isAvailable = true;
       }
       this.chainDisplayedColumns = ['nomdelachaine', 'shortname', 'outildetest', 'accesauxchaines', 'datedemodification',
@@ -143,13 +160,11 @@ export class ChainlistComponent implements OnInit {
 
 
   displayChainGrid() {
-    try {
-      this.chainService.getChains().subscribe(dataList => {
-        this.dataSourceChain.data = dataList;
-      });
-    } catch (exception) {
-      console.log('Message d erreur entityList 146!!! \n' + exception);
-    }
+
+    this.chainService.getChains().subscribe(dataList => {
+      this.dataSourceChain.data = dataList, error => console.log(error + 'erreur lors du subscribe 148');
+    });
+
   }
 
 
@@ -164,11 +179,9 @@ export class ChainlistComponent implements OnInit {
 
 
   onDeleteChain(chainid) {
-    try {
-      this.chainService.delete(chainid).subscribe(() => this.chains = this.displayChainGrid());
-    } catch (exception) {
-      console.log('Message d erreur entityList 165!!! \n' + exception);
-    }
+
+    this.chainService.delete(chainid).subscribe(() => this.chains = this.displayChainGrid()), error => console.log(error + 'erreur lors du subscribe 91');
+
   }
 
 
@@ -238,15 +251,16 @@ export class ChainlistComponent implements OnInit {
         datedemodification: this.user.datedecreation,
         auteurdemodification: this.user.auteurcreation,
         refmyaccess: this.user.refmyaccess,
-       // tchaines: [{ id: chain.id }]
-         tchaines: this.user.tchaines
+        // tchaines: [{ id: chain.id }]
+        tchaines: this.user.tchaines
       };
 
-   //   alert('this.user.chain.id : ' + this.user.chain);
-    this.chainToUserCreation.tchaines.push({id: chain.id });
+      //   alert('this.user.chain.id : ' + this.user.chain);
+      this.chainToUserCreation.tchaines.push({ id: chain.id });
 
       this.userService.createChainToUser(this.chainToUserCreation)
-        .subscribe(savedChainToUser => console.log('La ChainToUser a sauvegarder: ' + savedChainToUser));
+        .subscribe(savedChainToUser => console.log('La ChainToUser a sauvegarder: ' + savedChainToUser)),
+         error => console.log(error + 'erreur lors du subscribe 245');
     } catch (exception) {
       console.log('Message d erreur entityList 236!!! \n' + exception);
     }

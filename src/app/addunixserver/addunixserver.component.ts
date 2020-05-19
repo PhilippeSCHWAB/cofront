@@ -84,7 +84,7 @@ export class AlimserveurunixComponent implements OnInit {
               //   alert(this.serveurunix.id + ' / ' + this.serveurunix.serveurunix + ' / ' + this.serveurunix.createdAt);
               this.serveurunixForm.setValue({ id: this.serveurunix.id, serveurunix: this.serveurunix.serveurunix });
               this.formTitleLabel = 'Formulaire de modification SERVEUR UNIX';
-              this.formSubtitleLabel = 'Modifier un Timeline';
+              this.formSubtitleLabel = 'Modifier un Timeline', error => console.log(error + 'erreur lors du subscribe 87');
             });
           } else {
             //  alert('ADD');
@@ -115,46 +115,30 @@ export class AlimserveurunixComponent implements OnInit {
 
 
   displayServeurUnixGrid() {
-    try {
-      this.serveurunixService.getServeurUnixs().subscribe(dataList => {
-        this.dataSourceServeurUnix.data = dataList;
-      });
-    } catch (exception) {
-      console.log('Message d erreur alimserveurunix 124!!! \n' + exception);
-    }
+
+    this.serveurunixService.getServeurUnixs().subscribe(dataList => {
+      this.dataSourceServeurUnix.data = dataList, error => console.log(error + 'erreur lors du subscribe 91');
+    });
+
   }
 
 
 
   onSubmitServeurUnix(serveurunixFormValues) {
-
     // Set Timeline values
     this.serveurunix.id = serveurunixFormValues.id;
     this.serveurunix.serveurunix = serveurunixFormValues.serveurunix;
-    try {
-      if (this.actionFormStatus == 'ADD') {
- /*
-        this.serveurunixService.create(this.serveurunix).subscribe(() => this.location.back());
 
-this.serveurunixService.create(this.serveurunix).subscribe(() =>   location.replace('serveurunixList'));
-*/
-this.serveurunixService.create(this.serveurunix).subscribe(() =>   location.assign('serveurunixList'));
-      }
-    } catch (exception) {
-      console.log('Message d erreur alimserveurunix 145!!! \n' + exception);
+    if (this.actionFormStatus === 'ADD') {
+      this.serveurunixService.create(this.serveurunix).subscribe(() => this.location.back()), error => console.log(error + 'erreur lors du subscribe 132');
     }
+
     this.serveurunix.serveurunix = serveurunixFormValues.serveurunix;
-    try {
-      if (this.actionFormStatus == 'UPDATE') {
-  /*
-        this.serveurunixService.update(this.serveurunix).subscribe(() => this.location.back());
-  */
- this.serveurunixService.create(this.serveurunix).subscribe(() =>   location.assign('serveurunixList'));
-      }
-    } catch (exception) {
-      console.log('Message d erreur alimserveurunix 145!!! \n' + exception);
+
+    if (this.actionFormStatus === 'UPDATE') {
+      this.serveurunixService.update(this.serveurunix).subscribe(() => this.location.back()), error => console.log(error + 'erreur lors du subscribe 139');
     }
-    }
+  }
 
   hasError = (controlName: string, errorName: string) => {
     return this.serveurunixForm.controls[controlName].hasError(errorName);

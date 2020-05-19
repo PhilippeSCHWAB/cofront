@@ -110,7 +110,7 @@ export class ChainComponent implements OnInit {
               auteurcreation: new FormControl(''),
               datedemodification: new FormControl(''),
               auteurdemodification: new FormControl('')
-            });
+            }), error => console.log(error + 'erreur lors du subscribe 113');
             this.chainService.getChains().subscribe((chains: TChaines[]) => {
               // Get  by id
               this.chain = chains.filter(t => t.id === parseInt(this.paramId))[0];
@@ -140,7 +140,7 @@ export class ChainComponent implements OnInit {
                 auteurcreation: this.chain.auteurcreation,
                 datedemodification: this.chain.datedemodification,
                 auteurdemodification: this.chain.auteurdemodification
-              });
+              }), error => console.log(error + 'erreur lors du subscribe 143');
               this.formTitleLabel = 'Formulaire de modification 6:01';
               this.formSubtitleLabel = 'Modifier un TChaines';
             });
@@ -197,15 +197,11 @@ export class ChainComponent implements OnInit {
 
 
   displayChainGrid() {
-    try {
-      // Load chain list from the associate service
-      // and subscribe to the callback when loading complete
-      this.chainService.getChains().subscribe(dataList => {
-        this.dataSourceChain.data = dataList;
-      });
-    } catch (exception) {
-      console.log('Message d erreur chain 209!!! \n' + exception);
-    }
+    // Load chain list from the associate service
+    // and subscribe to the callback when loading complete
+    this.chainService.getChains().subscribe(dataList => {
+      this.dataSourceChain.data = dataList, error => console.log(error + 'erreur lors du subscribe 204');
+    });
   }
 
 
@@ -217,8 +213,7 @@ export class ChainComponent implements OnInit {
 
   public onCancel = () => {
     try {
-    //  this.location.back();
-      this.location.go('chainlist');
+      this.location.back();
     } catch (exception) {
       console.log('Message d erreur chain 209!!! \n' + exception);
     }
@@ -237,17 +232,10 @@ export class ChainComponent implements OnInit {
       console.log('Message d erreur chain 236!!! \n' + exception);
     }
 
-    try {
-      this.chainService.createChainsTestObservable(chain).subscribe(savedChain => console.log(savedChain));
-      alert('L\'utilisateur est enregistré');
-
-      //this.location.back();
-      this.location.go('chainlist');
-    } catch (exception) {
-      console.log('Message d erreur chain 245!!! \n' + exception);
-    }
-    //this.location.back();
-    this.location.go('chainlist');
+    this.chainService.createChainsTestObservable(chain).subscribe(savedChain => console.log(savedChain)),
+    error => console.log(error + 'erreur lors du subscribe 235');
+    alert('L\'utilisateur est enregistré');
+    this.location.back();
   }
 
   isCheckedoptionpmml(valor) {
